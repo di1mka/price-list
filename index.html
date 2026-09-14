@@ -10,12 +10,14 @@
     
     <style>
         :root {
-            --primary-text: #1d1d1f;
-            --secondary-text: #6e6e73;
-            --accent-color: #8b9a92;
-            --glass-bg: rgba(255, 255, 255, 0.5); 
-            --glass-border: rgba(255, 255, 255, 0.5);
-            --line-color: rgba(0, 0, 0, 0.12);
+            /* ТЕМНАЯ ТЕМА: Цвета текста и плашки */
+            --primary-text: #ffffff;
+            --secondary-text: #a1a1aa;
+            --accent-color: #94a3b8; /* Приглушенный сине-серый для акцентов */
+            --glass-bg: rgba(15, 15, 20, 0.65); /* Темное полупрозрачное стекло */
+            --glass-border: rgba(255, 255, 255, 0.15); /* Тонкая светлая граница */
+            --line-color: rgba(255, 255, 255, 0.15); /* Линии и точки */
+            --img-bg: rgba(255, 255, 255, 0.85); /* Подложка под картинки */
         }
 
         body {
@@ -34,22 +36,25 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-image: url('Gemini_Generated_Image_8eeu0h8eeu0h8eeu.jpg');
+            /* Новый темный фон */
+            background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             z-index: -1;
+            /* Легкое затемнение картинки, чтобы текст читался лучше */
+            filter: brightness(0.7); 
         }
 
         .glass-panel {
             background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--glass-border);
             width: 100%;
             max-width: 500px;
             border-radius: 24px; 
             padding: 30px 15px; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             box-sizing: border-box;
             transition: max-width 0.3s ease;
         }
@@ -65,6 +70,7 @@
             font-weight: 700;
             color: var(--primary-text);
             margin: 0 0 5px 0;
+            letter-spacing: 0.5px;
         }
 
         .subtitle {
@@ -102,12 +108,11 @@
             width: 36px; 
             height: 36px;
             border-radius: 8px;
-            /* ИЗМЕНЕНИЕ ЗДЕСЬ: contain вместо cover, чтобы импланты не обрезались */
             object-fit: contain; 
             margin-right: 12px;
-            background-color: transparent;
-            border: 1px solid var(--line-color);
-            padding: 2px; /* Небольшой отступ от рамки */
+            background-color: var(--img-bg); /* Светлый фон, чтобы инструменты не сливались */
+            border: 1px solid var(--glass-border);
+            padding: 2px; 
             flex-shrink: 0;
         }
 
@@ -127,7 +132,7 @@
 
         .item-name {
             font-size: 13px; 
-            font-weight: 600;
+            font-weight: 500; /* Сделал шрифт чуть тоньше для элегантности в темной теме */
             color: var(--primary-text);
             line-height: 1.2;
             white-space: normal;
@@ -135,7 +140,7 @@
 
         .price-leader {
             flex: 1;
-            border-bottom: 1px dotted rgba(0, 0, 0, 0.25);
+            border-bottom: 1px dotted var(--line-color);
             margin: 0 8px;
             position: relative;
             top: -4px;
@@ -270,7 +275,6 @@
             <div class="price-row"><img src="sureoss.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кортикальная кость SureOss 1 гр.</div><div class="price-leader"></div><div class="item-price">8 700 ₽</div></div></div></div>
             <div class="price-row"><img src="osteoss.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кортикально Губчатая кость OsteOss 1 гр.</div><div class="price-leader"></div><div class="item-price">9 500 ₽</div></div></div></div>
             
-            <!-- ДОБАВЛЕНЫ ПОЗИЦИИ BIO-OSS -->
             <div class="price-row"><img src="biooss_05.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Bio-Oss Geistlich S 0,5 г</div><div class="price-leader"></div><div class="item-price">10 541 ₽</div></div></div></div>
             <div class="price-row"><img src="biooss_1.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Bio-Oss Geistlich S 1 г</div><div class="price-leader"></div><div class="item-price">19 808 ₽</div></div></div></div>
             <div class="price-row"><img src="bioosspen.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Bio-Oss Pen Geistlich S 0.5 г</div><div class="price-leader"></div><div class="item-price">12 090 ₽</div></div></div></div>
