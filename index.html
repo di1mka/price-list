@@ -28,24 +28,25 @@
             justify-content: center;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
-            background-color: #111113; /* Глубокий темный фон */
+            background-color: #111113; /* Цвет, в который уйдет картинка */
         }
 
-        /* Умный слой с картинкой, который плавно растворяется внизу */
         .bg-image {
-            position: absolute; /* Не ломает скриншоты */
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 175vw; /* Высота подстраивается под пропорции 9:16 */
-            background-image: url('black.jpg'); /* Твоя картинка */
+            height: 178vw; /* Точная высота картинки с пропорцией 9:16 */
+            
+            /* Железобетонный метод: накладываем градиент прямо поверх фото */
+            background-image: 
+                linear-gradient(to bottom, rgba(17, 17, 19, 0) 60%, #111113 95%),
+                url('black.jpg'); /* Твоя картинка */
+                
             background-size: 100% auto;
             background-position: top center;
             background-repeat: no-repeat;
             z-index: -1;
-            /* Магия: градиентная маска, которая скрывает резкий край */
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
         }
 
 
