@@ -28,22 +28,16 @@
             justify-content: center;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
+
+            /* НОВЫЙ ФОН ДЛЯ СКРИНШОТОВ */
+            background-color: #111113; /* Глубокий темный цвет, сливается с низом фото */
+            /* Вставь сюда точное имя своей картинки: */
+            background-image: url('watermarked_img_17947597489224901556.jpg');
+            background-size: 100vw auto; /* Картинка всегда на всю ширину */
+            background-position: top center; /* Прибиваем картинку к верху */
+            background-repeat: no-repeat; /* Запрещаем ей дублироваться */
         }
 
-        .bg-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            /* Вставляем имя файла вот сюда: */
-            background-image: url('black.jpg'); 
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-            /* Легкое затемнение, если нужно. Если и так темно - можно удалить эту строчку: */
-            filter: brightness(0.7); 
-        }
 
         .glass-panel {
             background: var(--glass-bg);
@@ -193,8 +187,6 @@
     </style>
 </head>
 <body>
-
-<div class="bg-image"></div>
 
 <div class="glass-panel">
     <div class="header">
