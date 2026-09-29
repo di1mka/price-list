@@ -21,6 +21,10 @@
         }
 
         
+        html, body {
+            background-color: #111113; 
+        }
+
         body {
             margin: 0;
             padding: 20px 10px; 
@@ -29,21 +33,10 @@
             justify-content: center;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
-            /* Никаких background-color здесь быть не должно */
         }
 
         .bg-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            /* Если ты переименовал картинку на GitHub, оставляй black.jpg */
-            background-image: url('black.jpg'); 
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-            filter: brightness(0.7); 
+            display: none; /* Временно полностью отключаем картинку */
         }
 
         .glass-panel {
