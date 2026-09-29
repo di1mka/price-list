@@ -20,31 +20,30 @@
             --img-bg: rgba(255, 255, 255, 0.85); /* Подложка под картинки */
         }
 
-        html, body {
-            background-color: #111113;
-        }
         
         body {
-            margin: 0;
-            padding: 20px 10px; 
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-        }
+            margin: 0;
+            padding: 20px 10px; 
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            /* Никаких background-color здесь быть не должно */
+        }
 
-        .bg-image {
+        .bg-image {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-image: url('black.jpg');
+            /* Если ты переименовал картинку на GitHub, оставляй black.jpg */
+            background-image: url('black.jpg'); 
             background-size: cover;
             background-position: center;
             z-index: -1;
-            filter: brightness(0.7);
+            filter: brightness(0.7); 
         }
 
         .glass-panel {
@@ -197,6 +196,8 @@
 </head>
 <body>
 
+<body>
+    
 <div class="bg-image"></div>
     
 <div class="glass-panel">
