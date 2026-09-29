@@ -192,6 +192,26 @@
             .sub-row { font-size: 12px; }
         }
 
+        @media print {
+            /* Принудительно задаем темный фон и заставляем браузер его напечатать */
+            html, body {
+                background-color: #111113 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            /* Полностью отключаем блок с картинкой для PDF */
+            .bg-image {
+                display: none !important;
+            }
+
+            /* Убираем внешнюю тень у панели, чтобы документ выглядел чище */
+            .glass-panel {
+                box-shadow: none !important;
+                border: none !important;
+            }
+        }
+        
     </style>
 </head>
 <body>
