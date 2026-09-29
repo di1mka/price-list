@@ -21,10 +21,6 @@
         }
 
         
-        html, body {
-            background-color: #111113; 
-        }
-
         body {
             margin: 0;
             padding: 20px 10px; 
@@ -36,21 +32,16 @@
         }
 
         .bg-image {
-            display: none; /* Временно полностью отключаем картинку */
-        }
-
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--glass-border);
-            width: 100%;
-            max-width: 500px;
-            border-radius: 24px; 
-            padding: 30px 15px; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            box-sizing: border-box;
-            transition: max-width 0.3s ease;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('black.jpg'); 
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            filter: brightness(0.7); 
         }
 
         .header {
