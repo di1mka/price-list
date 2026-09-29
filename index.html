@@ -7,6 +7,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <!-- Настройка превью для мессенджеров (Telegram, WhatsApp, VK) -->
+    <meta property="og:title" content="Прайс-лист | Стоматология">
+    <meta property="og:description" content="Актуальные цены на расходные материалы и хирургические инструменты.">
+    <meta property="og:image" content="https://di1mka.github.io/price-list/preview.jpg">
+    <meta property="og:url" content="https://di1mka.github.io/price-list/">
+    <meta property="og:type" content="website">
     
     <style>
         :root {
@@ -46,6 +52,20 @@
             filter: brightness(0.7); 
         }
 
+        .glass-panel {
+            background: rgba(30, 30, 35, 0.65); /* Темный полупрозрачный фон */
+            backdrop-filter: blur(24px); /* Само размытие */
+            -webkit-backdrop-filter: blur(24px); /* Размытие для Safari/iPhone */
+            border: 1px solid rgba(255, 255, 255, 0.08); /* Тонкая рамка */
+            width: 100%;
+            max-width: 500px;
+            border-radius: 24px;
+            padding: 30px 15px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-sizing: border-box;
+            transition: max-width 0.3s ease;
+        }
+        
         .header {
             text-align: center;
             margin-bottom: 30px;
@@ -195,6 +215,14 @@
             .glass-panel {
                 box-shadow: none !important;
                 border: none !important;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .glass-panel {
+                max-width: 1000px;
+                padding: 50px 45px;
+                border-radius: 32px;
             }
         }
         
