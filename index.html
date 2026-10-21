@@ -17,7 +17,6 @@
     
     <style>
         :root {
-            /* ТЕМНАЯ ТЕМА: Цвета текста и плашки */
             --primary-text: #ffffff;
             --secondary-text: #a1a1aa;
             --accent-color: #94a3b8;
@@ -34,27 +33,38 @@
             display: flex;
             justify-content: center;
             min-height: 100vh;
+            background-color: #0d0d11;
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Фон через реальный тег <img> — 100% печатается в PDF */
         .bg-image {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-image: url('black.jpg'); 
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-            filter: brightness(0.7); 
+            z-index: 0;
+            overflow: hidden;
+            background-color: #0d0d11;
+        }
+
+        .bg-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(0.65);
+            display: block;
         }
 
         .glass-panel {
-            background: rgba(30, 30, 35, 0.65);
+            position: relative;
+            z-index: 1;
+            background: rgba(24, 24, 30, 0.68);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             width: 100%;
             max-width: 500px;
             border-radius: 24px;
@@ -65,7 +75,11 @@
         }
         
         .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
+            gap: 10px;
             margin-bottom: 30px;
         }
 
@@ -74,7 +88,7 @@
             font-size: 28px; 
             font-weight: 700;
             color: var(--primary-text);
-            margin: 0 0 5px 0;
+            margin: 0 0 4px 0;
             letter-spacing: 0.5px;
         }
 
@@ -86,10 +100,34 @@
             color: var(--accent-color);
         }
 
+        /* Контактный блок в углу */
+        .contact-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 8px 14px;
+            color: var(--primary-text);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .contact-badge span {
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
         .categories-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 35px 20px;
+        }
+
+        .print-col {
+            display: contents;
         }
 
         .category-title {
@@ -119,6 +157,18 @@
             border: 1px solid var(--glass-border);
             padding: 2px; 
             flex-shrink: 0;
+            box-sizing: border-box;
+        }
+
+        .item-img-lg {
+            width: 54px;
+            height: 54px;
+        }
+
+        .item-img-md {
+            width: 44px;
+            height: 44px;
+            align-self: flex-start;
         }
 
         .item-info {
@@ -143,13 +193,18 @@
             white-space: normal;
         }
 
+        .item-name-lg {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
         .price-leader {
             flex: 1;
             border-bottom: 1px dotted var(--line-color);
             margin: 0 8px;
             position: relative;
             top: -4px;
-            min-width: 15px; 
+            min-width: 12px; 
         }
 
         .item-price {
@@ -159,8 +214,12 @@
             white-space: nowrap;
         }
 
+        .item-price-lg {
+            font-size: 16px;
+        }
+
         .sub-variants {
-            margin-top: 2px;
+            margin-top: 4px;
         }
 
         .sub-row {
@@ -173,6 +232,17 @@
         
         .sub-name {
             font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .sub-price-val {
+            white-space: nowrap;
+        }
+
+        .unit-hint {
+            font-size: 10px;
+            opacity: 0.65;
+            margin-left: 4px;
         }
 
         .premium-box {
@@ -181,6 +251,10 @@
             border-radius: 16px;
             padding: 15px;
             margin-bottom: 20px;
+        }
+
+        .corner-footer-contact {
+            display: none;
         }
 
         @media (min-width: 768px) {
@@ -192,20 +266,34 @@
                 padding: 50px 45px;
                 border-radius: 32px;
             }
+            .header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                text-align: left;
+            }
             .categories-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+                align-items: start;
+            }
+            .print-col {
+                display: flex;
+                flex-direction: column;
+                gap: 35px;
+                min-width: 0;
             }
             h1 { font-size: 34px; }
             .subtitle { font-size: 13px; }
             .category-title { font-size: 22px; }
             .item-img { width: 44px; height: 44px; margin-right: 15px; }
+            .item-img-lg { width: 54px; height: 54px; }
             .item-name { font-size: 14px; }
             .item-price { font-size: 15px; }
             .sub-row { font-size: 12px; }
         }
 
         /* =========================================================
-           НАСТРОЙКИ ДЛЯ ПЕЧАТИ С ФОНОМ (А4) — ФИНАЛЬНАЯ ПРАВКА
+           ПЕЧАТЬ НА 1 ЛИСТ А4 (С ФОНОМ, БЕЗ НАЛОЖЕНИЙ И С НОМЕРОМ)
            ========================================================= */
         @page {
             size: A4 portrait;
@@ -223,315 +311,380 @@
                 height: 297mm !important;
                 margin: 0 !important;
                 padding: 0 !important;
-                background-color: #0d0d11 !important;
+                background: #0d0d11 !important;
                 overflow: hidden !important;
             }
 
             .bg-image {
-                display: block !important;
                 position: fixed !important;
                 top: 0 !important;
                 left: 0 !important;
                 width: 210mm !important;
                 height: 297mm !important;
-                background-image: url('black.jpg') !important;
-                background-size: cover !important;
-                background-position: center !important;
-                z-index: -1 !important;
-                filter: brightness(0.65) !important;
+                z-index: 0 !important;
+                display: block !important;
             }
 
+            .bg-photo {
+                width: 210mm !important;
+                height: 297mm !important;
+                object-fit: cover !important;
+                filter: brightness(0.55) contrast(1.05) !important;
+            }
+
+            /* Отключаем backdrop-filter в PDF, чтобы он не перекрывал фон глухим цветом */
             .glass-panel {
+                position: relative !important;
+                z-index: 1 !important;
                 width: 202mm !important;
                 max-width: 202mm !important;
-                height: 289mm !important;
-                margin: 4mm auto !important;
-                padding: 4mm 5mm !important;
+                height: 290mm !important;
+                margin: 3.5mm auto !important;
+                padding: 3.5mm 5mm !important;
                 box-sizing: border-box !important;
-                border-radius: 16px !important;
-                border: 1px solid rgba(255, 255, 255, 0.14) !important;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
-                background: rgba(20, 20, 26, 0.72) !important;
-                backdrop-filter: blur(16px) !important;
-                -webkit-backdrop-filter: blur(16px) !important;
+                border-radius: 14px !important;
+                border: 1px solid rgba(255, 255, 255, 0.18) !important;
+                box-shadow: none !important;
+                background: rgba(14, 15, 20, 0.45) !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
             }
 
             .header {
                 display: flex !important;
-                align-items: baseline !important;
+                flex-direction: row !important;
+                align-items: center !important;
                 justify-content: space-between !important;
-                margin-bottom: 2mm !important;
+                margin-bottom: 2.2mm !important;
                 padding-bottom: 1.5mm !important;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.22) !important;
                 text-align: left !important;
             }
 
             h1 {
                 font-size: 16px !important;
                 line-height: 1.1 !important;
-                margin: 0 !important;
+                margin: 0 0 1px 0 !important;
             }
 
             .subtitle {
-                font-size: 8.5px !important;
+                font-size: 8px !important;
                 letter-spacing: 1.2px !important;
             }
 
+            .contact-badge {
+                background: rgba(18, 20, 26, 0.8) !important;
+                border: 1px solid rgba(255, 255, 255, 0.28) !important;
+                border-radius: 8px !important;
+                padding: 1.5mm 3mm !important;
+                font-size: 10px !important;
+            }
+
+            /* Жесткая сетка в 2 колонки — колонки гарантированно не наезжают друг на друга */
             .categories-grid {
-                display: block !important;
-                column-count: 2 !important;
-                column-gap: 4.5mm !important;
+                display: grid !important;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+                gap: 4.5mm !important;
+                align-items: start !important;
+            }
+
+            .print-col {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 1.6mm !important;
+                min-width: 0 !important;
             }
 
             .category {
-                break-inside: avoid !important;
-                page-break-inside: avoid !important;
-                margin-bottom: 1.6mm !important;
-                background: rgba(255, 255, 255, 0.04) !important;
-                border: 1px solid rgba(255, 255, 255, 0.1) !important;
-                border-radius: 8px !important;
-                padding: 1.4mm 2mm !important;
+                margin: 0 !important;
+                background: rgba(16, 18, 24, 0.72) !important;
+                border: 1px solid rgba(255, 255, 255, 0.14) !important;
+                border-radius: 7px !important;
+                padding: 1.4mm 2.2mm !important;
                 box-sizing: border-box !important;
             }
 
-            .category:nth-child(5) {
-                break-before: column !important;
-            }
-
             .category-title {
-                font-size: 11px !important;
+                font-size: 10.8px !important;
                 margin-bottom: 1mm !important;
-                padding-bottom: 0.7mm !important;
+                padding-bottom: 0.6mm !important;
             }
 
             .premium-box {
                 padding: 1.2mm 1.6mm !important;
                 margin-bottom: 1.2mm !important;
-                border-radius: 6px !important;
+                border-radius: 5px !important;
                 background: rgba(255, 255, 255, 0.05) !important;
             }
 
             .price-row {
-                margin-bottom: 2.3px !important;
-                min-height: 13.5px !important;
+                margin-bottom: 2.2px !important;
+                min-height: 13px !important;
             }
 
-            .item-img {
-                box-sizing: border-box !important;
+            .item-img,
+            .item-img-lg,
+            .item-img-md {
                 width: 13.5px !important;
                 height: 13.5px !important;
                 border-radius: 3px !important;
-                margin-right: 5px !important;
+                margin-right: 4.5px !important;
                 padding: 1px !important;
             }
 
-            .item-name {
-                font-size: 8.4px !important;
-                line-height: 1.1 !important;
+            .item-name,
+            .item-name-lg {
+                font-size: 8.3px !important;
+                line-height: 1.12 !important;
             }
 
-            .item-price {
-                font-size: 8.7px !important;
-                line-height: 1.1 !important;
+            .item-price,
+            .item-price-lg {
+                font-size: 8.6px !important;
+                line-height: 1.12 !important;
             }
 
             .price-leader {
                 margin: 0 4px !important;
                 top: -2px !important;
+                min-width: 6px !important;
             }
 
-            /* Чистая сетка подвариантов ретрактора без наложений */
-            .sub-variants {
+            /* Для имплантатов (короткий текст) — 2 компактных столбца */
+            .premium-box .sub-variants {
                 display: grid !important;
                 grid-template-columns: 1fr 1fr !important;
-                gap: 0.8mm 3mm !important;
-                margin-top: 0.8mm !important;
+                gap: 0.4mm 2.5mm !important;
+                margin-top: 0.5mm !important;
+            }
+
+            /* Для ретрактора (длинный текст с ценой за шт.) — 1 ровный столбец без наложений */
+            .retractor-variants {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 0.3mm !important;
+                margin-top: 0.5mm !important;
             }
 
             .sub-row {
-                font-size: 7.0px !important;
-                line-height: 1.25 !important;
+                font-size: 7.1px !important;
+                line-height: 1.15 !important;
                 margin-top: 0 !important;
             }
 
-            .sub-row span {
-                font-size: 6.2px !important;
+            .unit-hint {
+                font-size: 6.3px !important;
+                margin-left: 2px !important;
+            }
+
+            /* Дополнительная карточка с номером в правом нижнем углу листа */
+            .corner-footer-contact {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                background: rgba(16, 18, 24, 0.78) !important;
+                border: 1px solid rgba(255, 255, 255, 0.22) !important;
+                border-radius: 7px !important;
+                padding: 2mm 3mm !important;
+                margin-top: 0.5mm !important;
+                color: #ffffff !important;
+                font-size: 9px !important;
+            }
+
+            .corner-footer-contact strong {
+                font-size: 10px !important;
+                letter-spacing: 0.3px !important;
             }
         }
     </style>
 </head>
 <body>
     
-<div class="bg-image"></div>
+<div class="bg-image">
+    <!-- Если в папке есть marble.jpg, покажет мрамор; иначе автоматически покажет твой black.jpg -->
+    <img src="marble.jpg" onerror="this.onerror=null; this.src='black.jpg';" class="bg-photo" alt="">
+</div>
     
 <div class="glass-panel">
     <div class="header">
-        <h1>Прайс-лист</h1>
-        <div class="subtitle">Материалы и инструменты • price-3vmed.ru</div>
+        <div>
+            <h1>Прайс-лист</h1>
+            <div class="subtitle">Материалы и инструменты • price-3vmed.ru</div>
+        </div>
+        <div class="contact-badge">
+            📞 8-905-498-23-26 <span>• Никита</span>
+        </div>
     </div>
 
     <div class="categories-grid">
         
-        <!-- 1. ИМПЛАНТАТЫ И КОМПОНЕНТЫ -->
-        <div class="category">
-            <div class="category-title">Имплантаты и компоненты</div>
-            
-            <!-- ВЫДЕЛЕННЫЙ ПРЕМИУМ-БЛОК ДЛЯ ГЛАВНЫХ ИМПЛАНТАТОВ -->
-            <div class="premium-box">
+        <!-- ЛЕВАЯ КОЛОНКА (Разделы 1–4) -->
+        <div class="print-col">
+            <!-- 1. ИМПЛАНТАТЫ И КОМПОНЕНТЫ -->
+            <div class="category">
+                <div class="category-title">Имплантаты и компоненты</div>
                 
-                <div class="price-row" style="margin-bottom: 25px;">
-                    <img src="astfa.png" alt="ASTFA" class="item-img" style="width: 54px; height: 54px;">
-                    <div class="item-info">
-                        <div class="item-header"><div class="item-name" style="font-size: 15px; font-weight: 600;">Имплантаты ASTFA (от 1 шт)</div><div class="price-leader"></div><div class="item-price" style="font-size: 16px;">4 800 ₽</div></div>
-                        <div class="sub-variants">
-                            <div class="sub-row"><div class="sub-name">от 10 шт</div><div class="price-leader"></div><div>4 600 ₽</div></div>
-                            <div class="sub-row"><div class="sub-name">от 20 шт</div><div class="price-leader"></div><div>4 400 ₽</div></div>
-                            <div class="sub-row"><div class="sub-name">от 30 шт</div><div class="price-leader"></div><div>4 200 ₽</div></div>
-                            <div class="sub-row"><div class="sub-name">от 50 шт</div><div class="price-leader"></div><div>4 000 ₽</div></div>
-                            <div class="sub-row"><div class="sub-name">от 100 шт</div><div class="price-leader"></div><div>3 800 ₽</div></div>
+                <div class="premium-box">
+                    <div class="price-row" style="margin-bottom: 18px;">
+                        <img src="astfa.png" alt="ASTFA" class="item-img item-img-lg">
+                        <div class="item-info">
+                            <div class="item-header"><div class="item-name item-name-lg">Имплантаты ASTFA (от 1 шт)</div><div class="price-leader"></div><div class="item-price item-price-lg">4 800 ₽</div></div>
+                            <div class="sub-variants">
+                                <div class="sub-row"><div class="sub-name">от 10 шт</div><div class="price-leader"></div><div class="sub-price-val">4 600 ₽</div></div>
+                                <div class="sub-row"><div class="sub-name">от 20 шт</div><div class="price-leader"></div><div class="sub-price-val">4 400 ₽</div></div>
+                                <div class="sub-row"><div class="sub-name">от 30 шт</div><div class="price-leader"></div><div class="sub-price-val">4 200 ₽</div></div>
+                                <div class="sub-row"><div class="sub-name">от 50 шт</div><div class="price-leader"></div><div class="sub-price-val">4 000 ₽</div></div>
+                                <div class="sub-row"><div class="sub-name">от 100 шт</div><div class="price-leader"></div><div class="sub-price-val">3 800 ₽</div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="price-row" style="margin-bottom: 4px;">
+                        <img src="fxir.png" alt="FXIR" class="item-img item-img-lg">
+                        <div class="item-info">
+                            <div class="item-header"><div class="item-name item-name-lg">Имплантаты FXIR (от 1 шт)</div><div class="price-leader"></div><div class="item-price item-price-lg">4 800 ₽</div></div>
+                            <div class="sub-variants">
+                                <div class="sub-row"><div class="sub-name">от 10 шт</div><div class="price-leader"></div><div class="sub-price-val">4 600 ₽</div></div>
+                                <div class="sub-row"><div class="sub-name">от 20 шт</div><div class="price-leader"></div><div class="sub-price-val">4 400 ₽</div></div>
+                                <div class="sub-row"><div class="sub-name">от 30 шт</div><div class="price-leader"></div><div class="sub-price-val">4 200 ₽</div></div>
+                                <div class="sub-row"><div class="sub-name">от 50 шт</div><div class="price-leader"></div><div class="sub-price-val">4 000 ₽</div></div>
+                                <div class="sub-row"><div class="sub-name">от 100 шт</div><div class="price-leader"></div><div class="sub-price-val">3 800 ₽</div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="price-row" style="margin-bottom: 5px;">
-                    <img src="fxir.png" alt="FXIR" class="item-img" style="width: 54px; height: 54px;">
-                    <div class="item-info">
-                        <div class="item-header"><div class="item-name" style="font-size: 15px; font-weight: 600;">Имплантаты FXIR (от 1 шт)</div><div class="price-leader"></div><div class="item-price" style="font-size: 16px;">4 800 ₽</div></div>
-                        <div class="sub-variants">
-                            <div class="sub-row"><div class="sub-name">от 10 шт</div><div class="price-leader"></div><div>4 600 ₽</div></div>
-                            <div class="sub-row"><div class="sub-name">от 20 шт</div><div class="price-leader"></div><div>4 400 ₽</div></div>
-                            <div class="sub-row"><div class="sub-name">от 30 шт</div><div class="price-leader"></div><div>4 200 ₽</div></div>
-                            <div class="sub-row"><div class="sub-name">от 50 шт</div><div class="price-leader"></div><div>4 000 ₽</div></div>
-                            <div class="sub-row"><div class="sub-name">от 100 шт</div><div class="price-leader"></div><div>3 800 ₽</div></div>
-                        </div>
-                    </div>
-                </div>
+                <div class="price-row"><img src="pr_multi.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Абатмент прямой Мульти</div><div class="price-leader"></div><div class="item-price">2 300 ₽</div></div></div></div>
+                <div class="price-row"><img src="ug_multi.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Абатмент угловой Мульти</div><div class="price-leader"></div><div class="item-price">3 500 ₽</div></div></div></div>
+                <div class="price-row"><img src="abatment.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Временный абатмент (с шестигранником)</div><div class="price-leader"></div><div class="item-price">1 850 ₽</div></div></div></div>
+                <div class="price-row"><img src="kolpach.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Защитный колпачок Мульти (AMHC48)</div><div class="price-leader"></div><div class="item-price">1 100 ₽</div></div></div></div>
+                <div class="price-row"><img src="kluch.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Ключ для уст-ки абатмента Мульти (AMOD)</div><div class="price-leader"></div><div class="item-price">2 800 ₽</div></div></div></div>
+                <div class="price-row"><img src="analog.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Лабораторный аналог (AR, Мульти)</div><div class="price-leader"></div><div class="item-price">950 ₽</div></div></div></div>
+                <div class="price-row"><img src="osnov.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Титановое основание</div><div class="price-leader"></div><div class="item-price">2 300 ₽</div></div></div></div>
+                <div class="price-row"><img src="zakr_loj.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Трансфер закрытая ложка</div><div class="price-leader"></div><div class="item-price">1 700 ₽</div></div></div></div>
+                <div class="price-row"><img src="otkr_loj.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Трансфер открытая ложка</div><div class="price-leader"></div><div class="item-price">1 700 ₽</div></div></div></div>
+                <div class="price-row"><img src="formir.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Формирователь десны</div><div class="price-leader"></div><div class="item-price">1 100 ₽</div></div></div></div>
             </div>
 
-            <div class="price-row"><img src="pr_multi.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Абатмент прямой Мульти</div><div class="price-leader"></div><div class="item-price">2 300 ₽</div></div></div></div>
-            <div class="price-row"><img src="ug_multi.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Абатмент угловой Мульти</div><div class="price-leader"></div><div class="item-price">3 500 ₽</div></div></div></div>
-            <div class="price-row"><img src="abatment.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Временный абатмент (с шестигранником)</div><div class="price-leader"></div><div class="item-price">1 850 ₽</div></div></div></div>
-            <div class="price-row"><img src="kolpach.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Защитный колпачок Мульти (AMHC48)</div><div class="price-leader"></div><div class="item-price">1 100 ₽</div></div></div></div>
-            <div class="price-row"><img src="kluch.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Ключ для уст-ки абатмента Мульти (AMOD)</div><div class="price-leader"></div><div class="item-price">2 800 ₽</div></div></div></div>
-            <div class="price-row"><img src="analog.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Лабораторный аналог (AR, Мульти)</div><div class="price-leader"></div><div class="item-price">950 ₽</div></div></div></div>
-            <div class="price-row"><img src="osnov.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Титановое основание</div><div class="price-leader"></div><div class="item-price">2 300 ₽</div></div></div></div>
-            <div class="price-row"><img src="zakr_loj.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Трансфер закрытая ложка</div><div class="price-leader"></div><div class="item-price">1 700 ₽</div></div></div></div>
-            <div class="price-row"><img src="otkr_loj.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Трансфер открытая ложка</div><div class="price-leader"></div><div class="item-price">1 700 ₽</div></div></div></div>
-            <div class="price-row"><img src="formir.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Формирователь десны</div><div class="price-leader"></div><div class="item-price">1 100 ₽</div></div></div></div>
-        </div>
-
-        <!-- 2. НАБОРЫ И ИНСТРУМЕНТЫ -->
-        <div class="category">
-            <div class="category-title">Наборы и инструменты</div>
-            <div class="price-row"><img src="convenient.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Набор CONVENIENT Kit BHM BIOTEM</div><div class="price-leader"></div><div class="item-price">30 000 ₽</div></div></div></div>
-            <div class="price-row"><img src="surgical.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Набор Surgical Kit BIOTEM</div><div class="price-leader"></div><div class="item-price">55 000 ₽</div></div></div></div>
-            <div class="price-row"><img src="surgical_guide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Набор Surgical GUIDE Kit GSK BIOTEM</div><div class="price-leader"></div><div class="item-price">85 000 ₽</div></div></div></div>
-            <div class="price-row"><img src="igli.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Иглы трубчатые (100шт) 30G-L, XS, M</div><div class="price-leader"></div><div class="item-price">450 ₽</div></div></div></div>
-            <div class="price-row"><img src="lezvia.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Лезвия для скальпеля 871B/12D</div><div class="price-leader"></div><div class="item-price">5 841 ₽</div></div></div></div>
-            <div class="price-row"><img src="lezvia.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Лезвия для скальпеля 871B/15C</div><div class="price-leader"></div><div class="item-price">4 873 ₽</div></div></div></div>
-            <div class="price-row"><img src="safesraper.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Скребок костный SAFESCRAPER TWIST</div><div class="price-leader"></div><div class="item-price">5 950 ₽</div></div></div></div>
-            <div class="price-row"><img src="retrakt.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Ретрактор "реТракт" (1 шт)</div><div class="price-leader"></div><div class="item-price">115 ₽</div></div></div></div>
-            <div class="price-row" style="margin-bottom: 20px;">
-                <img src="retrakt.png" alt="" class="item-img" style="width: 44px; height: 44px; align-self: flex-start;">
-                <div class="item-info">
-                    <div class="item-header">
-                        <div class="item-name" style="font-weight: 600; font-size: 14px;">Ретрактор "реТракт" (40 шт)</div>
+            <!-- 2. НАБОРЫ И ИНСТРУМЕНТЫ -->
+            <div class="category">
+                <div class="category-title">Наборы и инструменты</div>
+                <div class="price-row"><img src="convenient.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Набор CONVENIENT Kit BHM BIOTEM</div><div class="price-leader"></div><div class="item-price">30 000 ₽</div></div></div></div>
+                <div class="price-row"><img src="surgical.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Набор Surgical Kit BIOTEM</div><div class="price-leader"></div><div class="item-price">55 000 ₽</div></div></div></div>
+                <div class="price-row"><img src="surgical_guide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Набор Surgical GUIDE Kit GSK BIOTEM</div><div class="price-leader"></div><div class="item-price">85 000 ₽</div></div></div></div>
+                <div class="price-row"><img src="igli.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Иглы трубчатые (100шт) 30G-L, XS, M</div><div class="price-leader"></div><div class="item-price">450 ₽</div></div></div></div>
+                <div class="price-row"><img src="lezvia.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Лезвия для скальпеля 871B/12D</div><div class="price-leader"></div><div class="item-price">5 841 ₽</div></div></div></div>
+                <div class="price-row"><img src="lezvia.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Лезвия для скальпеля 871B/15C</div><div class="price-leader"></div><div class="item-price">4 873 ₽</div></div></div></div>
+                <div class="price-row"><img src="safesraper.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Скребок костный SAFESCRAPER TWIST</div><div class="price-leader"></div><div class="item-price">5 950 ₽</div></div></div></div>
+                <div class="price-row"><img src="retrakt.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Ретрактор "реТракт" (1 шт)</div><div class="price-leader"></div><div class="item-price">115 ₽</div></div></div></div>
+                <div class="price-row" style="margin-bottom: 6px;">
+                    <img src="retrakt.png" alt="" class="item-img item-img-md">
+                    <div class="item-info">
+                        <div class="item-header">
+                            <div class="item-name item-name-lg">Ретрактор "реТракт" (40 шт)</div>
+                        </div>
+                        <div class="sub-variants retractor-variants">
+                            <div class="sub-row"><div class="sub-name">1 уп (РРЦ)</div><div class="price-leader"></div><div class="sub-price-val">4 600 ₽ <span class="unit-hint">(115 ₽/шт)</span></div></div>
+                            <div class="sub-row"><div class="sub-name">от 6 уп</div><div class="price-leader"></div><div class="sub-price-val">4 400 ₽ <span class="unit-hint">(110 ₽/шт)</span></div></div>
+                            <div class="sub-row"><div class="sub-name">от 30 уп</div><div class="price-leader"></div><div class="sub-price-val">4 000 ₽ <span class="unit-hint">(100 ₽/шт)</span></div></div>
+                            <div class="sub-row"><div class="sub-name">от 60 уп</div><div class="price-leader"></div><div class="sub-price-val">3 800 ₽ <span class="unit-hint">(95 ₽/шт)</span></div></div>
+                            <div class="sub-row"><div class="sub-name">от 100 уп (МРЦ)</div><div class="price-leader"></div><div class="sub-price-val">3 600 ₽ <span class="unit-hint">(90 ₽/шт)</span></div></div>
+                        </div>
                     </div>
-                    <div class="sub-variants" style="margin-top: 6px;">
-                        <div class="sub-row"><div class="sub-name">1 уп (РРЦ)</div><div class="price-leader"></div><div>4 600 ₽ <span style="font-size: 10px; opacity: 0.6; margin-left: 4px;">(115 ₽/шт)</span></div></div>
-                        <div class="sub-row"><div class="sub-name">от 6 уп</div><div class="price-leader"></div><div>4 400 ₽ <span style="font-size: 10px; opacity: 0.6; margin-left: 4px;">(110 ₽/шт)</span></div></div>
-                        <div class="sub-row"><div class="sub-name">от 30 уп</div><div class="price-leader"></div><div>4 000 ₽ <span style="font-size: 10px; opacity: 0.6; margin-left: 4px;">(100 ₽/шт)</span></div></div>
-                        <div class="sub-row"><div class="sub-name">от 60 уп</div><div class="price-leader"></div><div>3 800 ₽ <span style="font-size: 10px; opacity: 0.6; margin-left: 4px;">(95 ₽/шт)</span></div></div>
-                        <div class="sub-row"><div class="sub-name">от 100 уп (МРЦ)</div><div class="price-leader"></div><div>3 600 ₽ <span style="font-size: 10px; opacity: 0.6; margin-left: 4px;">(90 ₽/шт)</span></div></div>
-                    </div>
-                </div>
-            </div>        
+                </div>        
+            </div>
+
+            <!-- 3. СЛЕПОЧНЫЕ МАТЕРИАЛЫ -->
+            <div class="category">
+                <div class="category-title">Слепочные материалы</div>
+                <div class="price-row"><img src="durosil.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">С-силикон DUROSIL L база 910 мл</div><div class="price-leader"></div><div class="item-price">2 931 ₽</div></div></div></div>
+                <div class="price-row"><img src="durosil.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DUROSIL Paste Hardener актив 60 мл</div><div class="price-leader"></div><div class="item-price">825 ₽</div></div></div></div>
+                <div class="price-row"><img src="durosil.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">С-силикон DUROSIL набор (900+140+60мл)</div><div class="price-leader"></div><div class="item-price">3 519 ₽</div></div></div></div>
+            </div>
+
+            <!-- 4. КОСТЬ И МЕМБРАНЫ -->
+            <div class="category">
+                <div class="category-title">Кость, Мембраны, Полистом</div>
+                <div class="price-row"><img src="sureoss.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кортикальная кость SureOss 1 гр.</div><div class="price-leader"></div><div class="item-price">8 700 ₽</div></div></div></div>
+                <div class="price-row"><img src="osteoss.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кортикально Губчатая кость OsteOss 1 гр.</div><div class="price-leader"></div><div class="item-price">9 500 ₽</div></div></div></div>
+                <div class="price-row"><img src="biooss_05.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Bio-Oss Geistlich S 0,5 г</div><div class="price-leader"></div><div class="item-price">10 541 ₽</div></div></div></div>
+                <div class="price-row"><img src="biooss_1.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Bio-Oss Geistlich S 1 г</div><div class="price-leader"></div><div class="item-price">19 808 ₽</div></div></div></div>
+                <div class="price-row"><img src="bioosspen.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Bio-Oss Pen Geistlich S 0.5 г</div><div class="price-leader"></div><div class="item-price">12 090 ₽</div></div></div></div>
+                <div class="price-row"><img src="kolapop.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Колапол КП-3 (10 фрагментов)</div><div class="price-leader"></div><div class="item-price">2 990 ₽</div></div></div></div>
+                <div class="price-row"><img src="softgide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">SOFTGIDE MSCM-1 (15*20 мм)</div><div class="price-leader"></div><div class="item-price">5 000 ₽</div></div></div></div>
+                <div class="price-row"><img src="softgide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">SOFTGIDE MSCM-3 (20*30 мм)</div><div class="price-leader"></div><div class="item-price">7 500 ₽</div></div></div></div>
+                <div class="price-row"><img src="softgide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">SOFTGIDE MSCM-5 (30*40 мм)</div><div class="price-leader"></div><div class="item-price">14 200 ₽</div></div></div></div>
+                <div class="price-row"><img src="biogide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Мембрана Bio-Gide Geistlich 25x25 мм</div><div class="price-leader"></div><div class="item-price">16 470 ₽</div></div></div></div>
+                <div class="price-row"><img src="stimulocc.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Губка Стимул-Осс D 11 мл №1</div><div class="price-leader"></div><div class="item-price">103 ₽</div></div></div></div>
+                <div class="price-row"><img src="gubka_gemo.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Губка гемостатическая 50Х50</div><div class="price-leader"></div><div class="item-price">117 ₽</div></div></div></div>
+                <div class="price-row"><img src="scraper.jpg" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Скребок костный OSUNG MND</div><div class="price-leader"></div><div class="item-price">3 000 ₽</div></div></div></div>
+            </div>
         </div>
 
-        <!-- 3. СЛЕПОЧНЫЕ МАТЕРИАЛЫ -->
-        <div class="category">
-            <div class="category-title">Слепочные материалы</div>
-            <div class="price-row"><img src="durosil.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">С-силикон DUROSIL L база 910 мл</div><div class="price-leader"></div><div class="item-price">2 931 ₽</div></div></div></div>
-            <div class="price-row"><img src="durosil.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DUROSIL Paste Hardener актив 60 мл</div><div class="price-leader"></div><div class="item-price">825 ₽</div></div></div></div>
-            <div class="price-row"><img src="durosil.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">С-силикон DUROSIL набор (900+140+60мл)</div><div class="price-leader"></div><div class="item-price">3 519 ₽</div></div></div></div>
-        </div>
+        <!-- ПРАВАЯ КОЛОНКА (Разделы 5–6 + угловой блок контактов) -->
+        <div class="print-col">
+            <!-- 5. КЕРАМИЧЕСКИЕ МАССЫ -->
+            <div class="category">
+                <div class="category-title">Керамические массы</div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR BL1 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR BL2 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR BL2 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR BL3 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A1 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A1 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A2 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A2 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A3 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A3 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A3.5 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A3.5 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A4 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A4 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-B2 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-B2 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-B3 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
+                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-C4 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
+                
+                <div class="price-row"><img src="enamel.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">ENAMEL ZR BLE 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
+                <div class="price-row"><img src="enamel.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">ENAMEL ZR-58 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
+                <div class="price-row"><img src="enamel.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">ENAMEL ZR-59 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
+                <div class="price-row"><img src="enamel.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">ENAMEL ZR-59 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
+                <div class="price-row"><img src="enamel.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">ENAMEL ZR-60 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
+                
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">NEUTRAL ZR 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">OPAQUE DENTIN ZR-A2 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">OPAQUE MC-A2 20гр.</div><div class="price-leader"></div><div class="item-price">2 700 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Clear ZR 20гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
+            </div>
 
-        <!-- 4. КОСТЬ И МЕМБРАНЫ -->
-        <div class="category">
-            <div class="category-title">Кость, Мембраны, Полистом</div>
-            
-            <div class="price-row"><img src="sureoss.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кортикальная кость SureOss 1 гр.</div><div class="price-leader"></div><div class="item-price">8 700 ₽</div></div></div></div>
-            <div class="price-row"><img src="osteoss.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кортикально Губчатая кость OsteOss 1 гр.</div><div class="price-leader"></div><div class="item-price">9 500 ₽</div></div></div></div>
-            
-            <div class="price-row"><img src="biooss_05.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Bio-Oss Geistlich S 0,5 г</div><div class="price-leader"></div><div class="item-price">10 541 ₽</div></div></div></div>
-            <div class="price-row"><img src="biooss_1.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Bio-Oss Geistlich S 1 г</div><div class="price-leader"></div><div class="item-price">19 808 ₽</div></div></div></div>
-            <div class="price-row"><img src="bioosspen.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Bio-Oss Pen Geistlich S 0.5 г</div><div class="price-leader"></div><div class="item-price">12 090 ₽</div></div></div></div>
+            <!-- 6. ШОВНЫЙ МАТЕРИАЛ -->
+            <div class="category">
+                <div class="category-title">Шовный материал</div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">ELCRYL 50L7DR16 сополимер. 5/0, 75 см (12шт)</div><div class="price-leader"></div><div class="item-price">355 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">ELCRYL 60L7DR13 сополимер. 6/0, 75 см (12шт)</div><div class="price-leader"></div><div class="item-price">375 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">ELLEN 50P7DR16 полипроп. 5/0, 75 см (12шт)</div><div class="price-leader"></div><div class="item-price">263 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">ELLEN 60P7DR13 полипроп. 6/0, 75 см (12шт)</div><div class="price-leader"></div><div class="item-price">263 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">ELLEN 70P7DR10 полипроп. 7/0, 75 см (12шт)</div><div class="price-leader"></div><div class="item-price">459 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Sutura PGCL Полиглекапрон 5/0-75-16</div><div class="price-leader"></div><div class="item-price">117 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Sutura NL75016F0 ПОЛИАМИД 5/0-75-16</div><div class="price-leader"></div><div class="item-price">100 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Sutura NL75016F4 ПОЛИАМИД 5/0-75-16</div><div class="price-leader"></div><div class="item-price">100 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Моноквик PGC5RR1738 A 5/0 mono (12шт)</div><div class="price-leader"></div><div class="item-price">393 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Монофил 4/0, 75 см, HR-20 кол.</div><div class="price-leader"></div><div class="item-price">163 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Монофил 4/0, 75 см, HS-20 обр.реж</div><div class="price-leader"></div><div class="item-price">177 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Монофил 5/0, 75 см, HR-20 кол.</div><div class="price-leader"></div><div class="item-price">167 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Монофил 5/0, 75 см, HS-20 обр.реж</div><div class="price-leader"></div><div class="item-price">177 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Ультрасорб 4/0, 75 см, HR-20 кол.</div><div class="price-leader"></div><div class="item-price">185 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Ультрасорб 4/0, 75 см, HS-20 обр.реж</div><div class="price-leader"></div><div class="item-price">229 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Ультрасорб 5/0, 75 см, HR-15 кол.</div><div class="price-leader"></div><div class="item-price">185 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Ультрасорб 5/0, 75 см, HR-20 кол.</div><div class="price-leader"></div><div class="item-price">185 ₽</div></div></div></div>
+                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Ультрасорб 5/0, 75 см, HS-15 обр.реж</div><div class="price-leader"></div><div class="item-price">229 ₽</div></div></div></div>
+            </div>
 
-            <div class="price-row"><img src="kolapop.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Колапол КП-3 (10 фрагментов)</div><div class="price-leader"></div><div class="item-price">2 990 ₽</div></div></div></div>
-            <div class="price-row"><img src="softgide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">SOFTGIDE MSCM-1 (15*20 мм)</div><div class="price-leader"></div><div class="item-price">5 000 ₽</div></div></div></div>
-            <div class="price-row"><img src="softgide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">SOFTGIDE MSCM-3 (20*30 мм)</div><div class="price-leader"></div><div class="item-price">7 500 ₽</div></div></div></div>
-            <div class="price-row"><img src="softgide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">SOFTGIDE MSCM-5 (30*40 мм)</div><div class="price-leader"></div><div class="item-price">14 200 ₽</div></div></div></div>
-            <div class="price-row"><img src="biogide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Мембрана Bio-Gide Geistlich 25x25 мм</div><div class="price-leader"></div><div class="item-price">16 470 ₽</div></div></div></div>
-            <div class="price-row"><img src="stimulocc.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Губка Стимул-Осс D 11 мл №1</div><div class="price-leader"></div><div class="item-price">103 ₽</div></div></div></div>
-            <div class="price-row"><img src="gubka_gemo.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Губка гемостатическая 50Х50</div><div class="price-leader"></div><div class="item-price">117 ₽</div></div></div></div>
-            <div class="price-row"><img src="scraper.jpg" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Скребок костный OSUNG MND</div><div class="price-leader"></div><div class="item-price">3 000 ₽</div></div></div></div>
-        </div>
-
-        <!-- 5. КЕРАМИЧЕСКИЕ МАССЫ -->
-        <div class="category">
-            <div class="category-title">Керамические массы</div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR BL1 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR BL2 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR BL2 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR BL3 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A1 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A1 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A2 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A2 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A3 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A3 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A3.5 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A3.5 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A4 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A4 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-B2 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-B2 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-B3 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-            <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-C4 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-            
-            <div class="price-row"><img src="enamel.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">ENAMEL ZR BLE 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-            <div class="price-row"><img src="enamel.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">ENAMEL ZR-58 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-            <div class="price-row"><img src="enamel.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">ENAMEL ZR-59 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-            <div class="price-row"><img src="enamel.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">ENAMEL ZR-59 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-            <div class="price-row"><img src="enamel.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">ENAMEL ZR-60 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-            
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">NEUTRAL ZR 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">OPAQUE DENTIN ZR-A2 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">OPAQUE MC-A2 20гр.</div><div class="price-leader"></div><div class="item-price">2 700 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Clear ZR 20гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-        </div>
-
-        <!-- 6. ШОВНЫЙ МАТЕРИАЛ -->
-        <div class="category">
-            <div class="category-title">Шовный материал</div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">ELCRYL 50L7DR16 сополимер. 5/0, 75 см (12шт)</div><div class="price-leader"></div><div class="item-price">355 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">ELCRYL 60L7DR13 сополимер. 6/0, 75 см (12шт)</div><div class="price-leader"></div><div class="item-price">375 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">ELLEN 50P7DR16 полипроп. 5/0, 75 см (12шт)</div><div class="price-leader"></div><div class="item-price">263 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">ELLEN 60P7DR13 полипроп. 6/0, 75 см (12шт)</div><div class="price-leader"></div><div class="item-price">263 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">ELLEN 70P7DR10 полипроп. 7/0, 75 см (12шт)</div><div class="price-leader"></div><div class="item-price">459 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Sutura PGCL Полиглекапрон 5/0-75-16</div><div class="price-leader"></div><div class="item-price">117 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Sutura NL75016F0 ПОЛИАМИД 5/0-75-16</div><div class="price-leader"></div><div class="item-price">100 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Sutura NL75016F4 ПОЛИАМИД 5/0-75-16</div><div class="price-leader"></div><div class="item-price">100 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Моноквик PGC5RR1738 A 5/0 mono (12шт)</div><div class="price-leader"></div><div class="item-price">393 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Монофил 4/0, 75 см, HR-20 кол.</div><div class="price-leader"></div><div class="item-price">163 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Монофил 4/0, 75 см, HS-20 обр.реж</div><div class="price-leader"></div><div class="item-price">177 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Монофил 5/0, 75 см, HR-20 кол.</div><div class="price-leader"></div><div class="item-price">167 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Монофил 5/0, 75 см, HS-20 обр.реж</div><div class="price-leader"></div><div class="item-price">177 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Ультрасорб 4/0, 75 см, HR-20 кол.</div><div class="price-leader"></div><div class="item-price">185 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Ультрасорб 4/0, 75 см, HS-20 обр.реж</div><div class="price-leader"></div><div class="item-price">229 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Ультрасорб 5/0, 75 см, HR-15 кол.</div><div class="price-leader"></div><div class="item-price">185 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Ультрасорб 5/0, 75 см, HR-20 кол.</div><div class="price-leader"></div><div class="item-price">185 ₽</div></div></div></div>
-            <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Ультрасорб 5/0, 75 см, HS-15 обр.реж</div><div class="price-leader"></div><div class="item-price">229 ₽</div></div></div></div>
+            <!-- Блок с телефоном в правом нижнем углу листа А4 -->
+            <div class="corner-footer-contact">
+                <span>По вопросам заказа:</span>
+                <strong>📞 8-905-498-23-26 — Никита</strong>
+            </div>
         </div>
 
     </div>
