@@ -205,7 +205,7 @@
         }
 
         /* =========================================================
-           НАСТРОЙКИ ДЛЯ ПЕЧАТИ С ФОНОВОЙ КАРТИНКОЙ И СТЕКЛОМ (А4)
+           НАСТРОЙКИ ДЛЯ ПЕЧАТИ С ФОНОМ (А4) — ФИНАЛЬНАЯ ПРАВКА
            ========================================================= */
         @page {
             size: A4 portrait;
@@ -227,7 +227,6 @@
                 overflow: hidden !important;
             }
 
-            /* Включаем и растягиваем фоновую картинку на весь лист А4 */
             .bg-image {
                 display: block !important;
                 position: fixed !important;
@@ -242,7 +241,6 @@
                 filter: brightness(0.65) !important;
             }
 
-            /* Делаем основную панель полупрозрачной, чтобы было видно фон */
             .glass-panel {
                 width: 202mm !important;
                 max-width: 202mm !important;
@@ -342,21 +340,22 @@
                 top: -2px !important;
             }
 
+            /* Чистая сетка подвариантов ретрактора без наложений */
             .sub-variants {
                 display: grid !important;
                 grid-template-columns: 1fr 1fr !important;
-                gap: 0.3mm 3mm !important;
-                margin-top: 0.5mm !important;
+                gap: 0.8mm 3mm !important;
+                margin-top: 0.8mm !important;
             }
 
             .sub-row {
-                font-size: 7.1px !important;
-                line-height: 1.1 !important;
+                font-size: 7.0px !important;
+                line-height: 1.25 !important;
                 margin-top: 0 !important;
             }
 
             .sub-row span {
-                font-size: 6.4px !important;
+                font-size: 6.2px !important;
             }
         }
     </style>
