@@ -7,11 +7,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
     <!-- Настройка превью для мессенджеров (Telegram, WhatsApp, VK) -->
     <meta property="og:title" content="Прайс-лист | Стоматология">
     <meta property="og:description" content="Актуальные цены на расходные материалы и хирургические инструменты.">
-    <meta property="og:image" content="https://di1mka.github.io/price-list/preview.jpg">
-    <meta property="og:url" content="https://di1mka.github.io/price-list/">
+    <meta property="og:image" content="https://price-3vmed.ru/preview.jpg">
+    <meta property="og:url" content="https://price-3vmed.ru/">
     <meta property="og:type" content="website">
     
     <style>
@@ -26,7 +27,6 @@
             --img-bg: rgba(255, 255, 255, 0.85); /* Подложка под картинки */
         }
 
-        
         body {
             margin: 0;
             padding: 20px 10px; 
@@ -35,7 +35,6 @@
             justify-content: center;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
-            /* Никаких background-color здесь быть не должно */
         }
 
         .bg-image {
@@ -44,7 +43,6 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            /* Если ты переименовал картинку на GitHub, оставляй black.jpg */
             background-image: url('black.jpg'); 
             background-size: cover;
             background-position: center;
@@ -53,10 +51,10 @@
         }
 
         .glass-panel {
-            background: rgba(30, 30, 35, 0.65); /* Темный полупрозрачный фон */
-            backdrop-filter: blur(24px); /* Само размытие */
-            -webkit-backdrop-filter: blur(24px); /* Размытие для Safari/iPhone */
-            border: 1px solid rgba(255, 255, 255, 0.08); /* Тонкая рамка */
+            background: rgba(30, 30, 35, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             width: 100%;
             max-width: 500px;
             border-radius: 24px;
@@ -117,7 +115,7 @@
             border-radius: 8px;
             object-fit: contain; 
             margin-right: 12px;
-            background-color: var(--img-bg); /* Светлый фон, чтобы инструменты не сливались */
+            background-color: var(--img-bg);
             border: 1px solid var(--glass-border);
             padding: 2px; 
             flex-shrink: 0;
@@ -139,7 +137,7 @@
 
         .item-name {
             font-size: 13px; 
-            font-weight: 500; /* Сделал шрифт чуть тоньше для элегантности в темной теме */
+            font-weight: 500;
             color: var(--primary-text);
             line-height: 1.2;
             white-space: normal;
@@ -177,6 +175,14 @@
             font-weight: 500;
         }
 
+        .premium-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
         @media (min-width: 768px) {
             body {
                 padding: 40px 20px;
@@ -198,38 +204,140 @@
             .sub-row { font-size: 12px; }
         }
 
+        /* =========================================================
+           НАСТРОЙКИ ДЛЯ ПЕЧАТИ И ЭКСПОРТА НА 1 СТРАНИЦУ А4 (ЦВЕТНОЙ)
+           ========================================================= */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
         @media print {
-            /* Принудительно задаем темный фон и заставляем браузер его напечатать */
             html, body {
-                background-color: #111113 !important;
+                width: 210mm !important;
+                height: 297mm !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background-color: #141418 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
+                overflow: hidden !important;
             }
-            
-            /* Полностью отключаем блок с картинкой для PDF */
+
             .bg-image {
                 display: none !important;
             }
 
-            /* Убираем внешнюю тень у панели, чтобы документ выглядел чище */
             .glass-panel {
-                box-shadow: none !important;
+                width: 210mm !important;
+                max-width: 210mm !important;
+                height: 297mm !important;
+                margin: 0 !important;
+                padding: 6mm 8mm !important;
+                border-radius: 0 !important;
                 border: none !important;
+                box-shadow: none !important;
+                background: #141418 !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
             }
-        }
 
-        @media (min-width: 768px) {
-            .glass-panel {
-                max-width: 1000px;
-                padding: 50px 45px;
-                border-radius: 32px;
+            /* Компактная шапка в одну линию */
+            .header {
+                display: flex !important;
+                align-items: baseline !important;
+                justify-content: space-between !important;
+                margin-bottom: 3.5mm !important;
+                padding-bottom: 2mm !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+                text-align: left !important;
+            }
+
+            h1 {
+                font-size: 18px !important;
+                margin: 0 !important;
+            }
+
+            .subtitle {
+                font-size: 9px !important;
+                letter-spacing: 1.2px !important;
+            }
+
+            /* Две плотные сбалансированные колонки */
+            .categories-grid {
+                display: block !important;
+                column-count: 2 !important;
+                column-gap: 6mm !important;
+            }
+
+            .category {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+                margin-bottom: 3mm !important;
+                background: rgba(255, 255, 255, 0.025) !important;
+                border: 1px solid rgba(255, 255, 255, 0.08) !important;
+                border-radius: 8px !important;
+                padding: 2mm 2.5mm !important;
+            }
+
+            .category-title {
+                font-size: 12px !important;
+                margin-bottom: 1.5mm !important;
+                padding-bottom: 1mm !important;
+            }
+
+            .premium-box {
+                padding: 1.5mm 2mm !important;
+                margin-bottom: 1.5mm !important;
+                border-radius: 6px !important;
+                background: rgba(255, 255, 255, 0.04) !important;
+            }
+
+            .price-row {
+                margin-bottom: 1mm !important;
+            }
+
+            .item-img {
+                width: 16px !important;
+                height: 16px !important;
+                border-radius: 4px !important;
+                margin-right: 5px !important;
+                padding: 1px !important;
+            }
+
+            .item-name {
+                font-size: 8.8px !important;
+                line-height: 1.15 !important;
+            }
+
+            .item-price {
+                font-size: 9px !important;
+            }
+
+            .price-leader {
+                margin: 0 4px !important;
+                top: -2px !important;
+            }
+
+            /* Оптовые подварианты в 2 компактных столбца */
+            .sub-variants {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 0.5mm 3mm !important;
+                margin-top: 0.8mm !important;
+            }
+
+            .sub-row {
+                font-size: 7.5px !important;
+                margin-top: 0 !important;
+            }
+
+            .sub-row span {
+                font-size: 6.8px !important;
             }
         }
-        
     </style>
 </head>
-<body>
-
 <body>
     
 <div class="bg-image"></div>
@@ -237,7 +345,7 @@
 <div class="glass-panel">
     <div class="header">
         <h1>Прайс-лист</h1>
-        <div class="subtitle">Материалы и инструменты</div>
+        <div class="subtitle">Материалы и инструменты • price-3vmed.ru</div>
     </div>
 
     <div class="categories-grid">
@@ -247,13 +355,11 @@
             <div class="category-title">Имплантаты и компоненты</div>
             
             <!-- ВЫДЕЛЕННЫЙ ПРЕМИУМ-БЛОК ДЛЯ ГЛАВНЫХ ИМПЛАНТАТОВ -->
-            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 15px; margin-bottom: 20px;">
+            <div class="premium-box">
                 
                 <div class="price-row" style="margin-bottom: 25px;">
-                    <!-- Увеличили картинку до 54px -->
                     <img src="astfa.png" alt="ASTFA" class="item-img" style="width: 54px; height: 54px;">
                     <div class="item-info">
-                        <!-- Увеличили шрифт названия до 15px -->
                         <div class="item-header"><div class="item-name" style="font-size: 15px; font-weight: 600;">Имплантаты ASTFA (от 1 шт)</div><div class="price-leader"></div><div class="item-price" style="font-size: 16px;">4 800 ₽</div></div>
                         <div class="sub-variants">
                             <div class="sub-row"><div class="sub-name">от 10 шт</div><div class="price-leader"></div><div>4 600 ₽</div></div>
@@ -328,7 +434,7 @@
             <div class="price-row"><img src="durosil.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">С-силикон DUROSIL набор (900+140+60мл)</div><div class="price-leader"></div><div class="item-price">3 519 ₽</div></div></div></div>
         </div>
 
-        <!-- 4. КОСТЬ И МЕМБРАНЫ (С новыми позициями) -->
+        <!-- 4. КОСТЬ И МЕМБРАНЫ -->
         <div class="category">
             <div class="category-title">Кость, Мембраны, Полистом</div>
             
@@ -384,7 +490,7 @@
         </div>
 
         <!-- 6. ШОВНЫЙ МАТЕРИАЛ -->
-        <div class="category" style="margin-bottom: 10px;">
+        <div class="category">
             <div class="category-title">Шовный материал</div>
             <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">ELCRYL 50L7DR16 сополимер. 5/0, 75 см (12шт)</div><div class="price-leader"></div><div class="item-price">355 ₽</div></div></div></div>
             <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">ELCRYL 60L7DR13 сополимер. 6/0, 75 см (12шт)</div><div class="price-leader"></div><div class="item-price">375 ₽</div></div></div></div>
