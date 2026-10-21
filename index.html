@@ -37,7 +37,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Фон через реальный тег <img> — 100% печатается в PDF */
         .bg-image {
             position: fixed;
             top: 0;
@@ -100,7 +99,6 @@
             color: var(--accent-color);
         }
 
-        /* Контактный блок в углу */
         .contact-badge {
             display: inline-flex;
             align-items: center;
@@ -293,7 +291,7 @@
         }
 
         /* =========================================================
-           ПЕЧАТЬ НА 1 ЛИСТ А4 (С ФОНОМ, БЕЗ НАЛОЖЕНИЙ И С НОМЕРОМ)
+           ПЕЧАТЬ НА 1 ЛИСТ А4 (КРУПНЫЙ ШРИФТ + ПОЛНОЕ ЗАПОЛНЕНИЕ ЛИСТА)
            ========================================================= */
         @page {
             size: A4 portrait;
@@ -332,7 +330,6 @@
                 filter: brightness(0.55) contrast(1.05) !important;
             }
 
-            /* Отключаем backdrop-filter в PDF, чтобы он не перекрывал фон глухим цветом */
             .glass-panel {
                 position: relative !important;
                 z-index: 1 !important;
@@ -340,7 +337,7 @@
                 max-width: 202mm !important;
                 height: 290mm !important;
                 margin: 3.5mm auto !important;
-                padding: 3.5mm 5mm !important;
+                padding: 4.5mm 5.5mm !important;
                 box-sizing: border-box !important;
                 border-radius: 14px !important;
                 border: 1px solid rgba(255, 255, 255, 0.18) !important;
@@ -348,6 +345,8 @@
                 background: rgba(14, 15, 20, 0.45) !important;
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
+                display: flex !important;
+                flex-direction: column !important;
             }
 
             .header {
@@ -355,93 +354,100 @@
                 flex-direction: row !important;
                 align-items: center !important;
                 justify-content: space-between !important;
-                margin-bottom: 2.2mm !important;
-                padding-bottom: 1.5mm !important;
+                margin-bottom: 3mm !important;
+                padding-bottom: 2mm !important;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.22) !important;
                 text-align: left !important;
+                flex-shrink: 0 !important;
             }
 
             h1 {
-                font-size: 16px !important;
+                font-size: 20px !important;
                 line-height: 1.1 !important;
-                margin: 0 0 1px 0 !important;
+                margin: 0 0 2px 0 !important;
             }
 
             .subtitle {
-                font-size: 8px !important;
-                letter-spacing: 1.2px !important;
+                font-size: 9px !important;
+                letter-spacing: 1.3px !important;
             }
 
             .contact-badge {
-                background: rgba(18, 20, 26, 0.8) !important;
+                background: rgba(18, 20, 26, 0.82) !important;
                 border: 1px solid rgba(255, 255, 255, 0.28) !important;
-                border-radius: 8px !important;
-                padding: 1.5mm 3mm !important;
-                font-size: 10px !important;
+                border-radius: 9px !important;
+                padding: 2mm 3.5mm !important;
+                font-size: 11px !important;
             }
 
-            /* Жесткая сетка в 2 колонки — колонки гарантированно не наезжают друг на друга */
+            /* Сетка растягивается на всю оставшуюся высоту листа */
             .categories-grid {
+                flex: 1 !important;
                 display: grid !important;
                 grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
                 gap: 4.5mm !important;
-                align-items: start !important;
+                align-items: stretch !important;
             }
 
             .print-col {
                 display: flex !important;
                 flex-direction: column !important;
-                gap: 1.6mm !important;
+                justify-content: space-between !important;
                 min-width: 0 !important;
+                height: 100% !important;
             }
 
             .category {
                 margin: 0 !important;
-                background: rgba(16, 18, 24, 0.72) !important;
+                background: rgba(16, 18, 24, 0.74) !important;
                 border: 1px solid rgba(255, 255, 255, 0.14) !important;
-                border-radius: 7px !important;
-                padding: 1.4mm 2.2mm !important;
+                border-radius: 8px !important;
+                padding: 2mm 2.6mm !important;
                 box-sizing: border-box !important;
             }
 
             .category-title {
-                font-size: 10.8px !important;
-                margin-bottom: 1mm !important;
-                padding-bottom: 0.6mm !important;
+                font-size: 12.5px !important;
+                margin-bottom: 1.4mm !important;
+                padding-bottom: 0.8mm !important;
             }
 
             .premium-box {
-                padding: 1.2mm 1.6mm !important;
-                margin-bottom: 1.2mm !important;
-                border-radius: 5px !important;
+                padding: 1.5mm 2mm !important;
+                margin-bottom: 1.5mm !important;
+                border-radius: 6px !important;
                 background: rgba(255, 255, 255, 0.05) !important;
             }
 
             .price-row {
-                margin-bottom: 2.2px !important;
-                min-height: 13px !important;
+                margin-bottom: 3.1px !important;
+                min-height: 15.5px !important;
+            }
+
+            .price-row:last-child {
+                margin-bottom: 0 !important;
             }
 
             .item-img,
             .item-img-lg,
             .item-img-md {
-                width: 13.5px !important;
-                height: 13.5px !important;
-                border-radius: 3px !important;
-                margin-right: 4.5px !important;
+                width: 15.5px !important;
+                height: 15.5px !important;
+                border-radius: 3.5px !important;
+                margin-right: 5.5px !important;
                 padding: 1px !important;
             }
 
             .item-name,
             .item-name-lg {
-                font-size: 8.3px !important;
-                line-height: 1.12 !important;
+                font-size: 9.4px !important;
+                line-height: 1.15 !important;
             }
 
             .item-price,
             .item-price-lg {
-                font-size: 8.6px !important;
-                line-height: 1.12 !important;
+                font-size: 9.7px !important;
+                line-height: 1.15 !important;
             }
 
             .price-leader {
@@ -450,49 +456,49 @@
                 min-width: 6px !important;
             }
 
-            /* Для имплантатов (короткий текст) — 2 компактных столбца */
+            /* Оптовые цены имплантатов — 2 столбца */
             .premium-box .sub-variants {
                 display: grid !important;
                 grid-template-columns: 1fr 1fr !important;
-                gap: 0.4mm 2.5mm !important;
-                margin-top: 0.5mm !important;
+                gap: 0.5mm 3mm !important;
+                margin-top: 0.7mm !important;
             }
 
-            /* Для ретрактора (длинный текст с ценой за шт.) — 1 ровный столбец без наложений */
+            /* Оптовые цены ретрактора — 1 ровный столбец */
             .retractor-variants {
                 display: flex !important;
                 flex-direction: column !important;
-                gap: 0.3mm !important;
-                margin-top: 0.5mm !important;
+                gap: 0.4mm !important;
+                margin-top: 0.7mm !important;
             }
 
             .sub-row {
-                font-size: 7.1px !important;
-                line-height: 1.15 !important;
+                font-size: 8px !important;
+                line-height: 1.2 !important;
                 margin-top: 0 !important;
             }
 
             .unit-hint {
-                font-size: 6.3px !important;
+                font-size: 7.2px !important;
                 margin-left: 2px !important;
             }
 
-            /* Дополнительная карточка с номером в правом нижнем углу листа */
+            /* Нижняя карточка контактов прижата к правому нижнему углу */
             .corner-footer-contact {
                 display: flex !important;
                 align-items: center !important;
                 justify-content: space-between !important;
-                background: rgba(16, 18, 24, 0.78) !important;
-                border: 1px solid rgba(255, 255, 255, 0.22) !important;
-                border-radius: 7px !important;
-                padding: 2mm 3mm !important;
-                margin-top: 0.5mm !important;
+                background: rgba(16, 18, 24, 0.82) !important;
+                border: 1px solid rgba(255, 255, 255, 0.25) !important;
+                border-radius: 8px !important;
+                padding: 2.8mm 3.5mm !important;
+                margin: 0 !important;
                 color: #ffffff !important;
-                font-size: 9px !important;
+                font-size: 10px !important;
             }
 
             .corner-footer-contact strong {
-                font-size: 10px !important;
+                font-size: 11px !important;
                 letter-spacing: 0.3px !important;
             }
         }
@@ -501,7 +507,6 @@
 <body>
     
 <div class="bg-image">
-    <!-- Если в папке есть marble.jpg, покажет мрамор; иначе автоматически покажет твой black.jpg -->
     <img src="marble.jpg" onerror="this.onerror=null; this.src='black.jpg';" class="bg-photo" alt="">
 </div>
     
@@ -525,7 +530,7 @@
                 <div class="category-title">Имплантаты и компоненты</div>
                 
                 <div class="premium-box">
-                    <div class="price-row" style="margin-bottom: 18px;">
+                    <div class="price-row" style="margin-bottom: 14px;">
                         <img src="astfa.png" alt="ASTFA" class="item-img item-img-lg">
                         <div class="item-info">
                             <div class="item-header"><div class="item-name item-name-lg">Имплантаты ASTFA (от 1 шт)</div><div class="price-leader"></div><div class="item-price item-price-lg">4 800 ₽</div></div>
@@ -539,7 +544,7 @@
                         </div>
                     </div>
 
-                    <div class="price-row" style="margin-bottom: 4px;">
+                    <div class="price-row" style="margin-bottom: 2px;">
                         <img src="fxir.png" alt="FXIR" class="item-img item-img-lg">
                         <div class="item-info">
                             <div class="item-header"><div class="item-name item-name-lg">Имплантаты FXIR (от 1 шт)</div><div class="price-leader"></div><div class="item-price item-price-lg">4 800 ₽</div></div>
@@ -577,7 +582,7 @@
                 <div class="price-row"><img src="lezvia.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Лезвия для скальпеля 871B/15C</div><div class="price-leader"></div><div class="item-price">4 873 ₽</div></div></div></div>
                 <div class="price-row"><img src="safesraper.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Скребок костный SAFESCRAPER TWIST</div><div class="price-leader"></div><div class="item-price">5 950 ₽</div></div></div></div>
                 <div class="price-row"><img src="retrakt.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Ретрактор "реТракт" (1 шт)</div><div class="price-leader"></div><div class="item-price">115 ₽</div></div></div></div>
-                <div class="price-row" style="margin-bottom: 6px;">
+                <div class="price-row" style="margin-bottom: 2px;">
                     <img src="retrakt.png" alt="" class="item-img item-img-md">
                     <div class="item-info">
                         <div class="item-header">
