@@ -196,6 +196,13 @@
             font-weight: 600;
         }
 
+        .shades-note {
+            font-size: 11px;
+            color: var(--secondary-text);
+            margin-top: 2px;
+            line-height: 1.2;
+        }
+
         .price-leader {
             flex: 1;
             border-bottom: 1px dotted var(--line-color);
@@ -291,7 +298,7 @@
         }
 
         /* =========================================================
-           ПЕЧАТЬ НА 1 ЛИСТ А4 (КРУПНЫЙ ШРИФТ + ПОЛНОЕ ЗАПОЛНЕНИЕ ЛИСТА)
+           ПЕЧАТЬ НА 1 ЛИСТ А4 (С НОВЫМИ ПОЗИЦИЯМИ THE GRAFT)
            ========================================================= */
         @page {
             size: A4 portrait;
@@ -337,7 +344,7 @@
                 max-width: 202mm !important;
                 height: 290mm !important;
                 margin: 3.5mm auto !important;
-                padding: 4.5mm 5.5mm !important;
+                padding: 4mm 5.5mm !important;
                 box-sizing: border-box !important;
                 border-radius: 14px !important;
                 border: 1px solid rgba(255, 255, 255, 0.18) !important;
@@ -354,21 +361,21 @@
                 flex-direction: row !important;
                 align-items: center !important;
                 justify-content: space-between !important;
-                margin-bottom: 3mm !important;
-                padding-bottom: 2mm !important;
+                margin-bottom: 2.5mm !important;
+                padding-bottom: 1.8mm !important;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.22) !important;
                 text-align: left !important;
                 flex-shrink: 0 !important;
             }
 
             h1 {
-                font-size: 20px !important;
+                font-size: 19px !important;
                 line-height: 1.1 !important;
                 margin: 0 0 2px 0 !important;
             }
 
             .subtitle {
-                font-size: 9px !important;
+                font-size: 8.8px !important;
                 letter-spacing: 1.3px !important;
             }
 
@@ -376,11 +383,10 @@
                 background: rgba(18, 20, 26, 0.82) !important;
                 border: 1px solid rgba(255, 255, 255, 0.28) !important;
                 border-radius: 9px !important;
-                padding: 2mm 3.5mm !important;
-                font-size: 11px !important;
+                padding: 1.8mm 3.5mm !important;
+                font-size: 10.5px !important;
             }
 
-            /* Сетка растягивается на всю оставшуюся высоту листа */
             .categories-grid {
                 flex: 1 !important;
                 display: grid !important;
@@ -402,26 +408,26 @@
                 background: rgba(16, 18, 24, 0.74) !important;
                 border: 1px solid rgba(255, 255, 255, 0.14) !important;
                 border-radius: 8px !important;
-                padding: 2mm 2.6mm !important;
+                padding: 1.8mm 2.5mm !important;
                 box-sizing: border-box !important;
             }
 
             .category-title {
-                font-size: 12.5px !important;
-                margin-bottom: 1.4mm !important;
-                padding-bottom: 0.8mm !important;
+                font-size: 12px !important;
+                margin-bottom: 1.2mm !important;
+                padding-bottom: 0.7mm !important;
             }
 
             .premium-box {
-                padding: 1.5mm 2mm !important;
-                margin-bottom: 1.5mm !important;
+                padding: 1.3mm 1.8mm !important;
+                margin-bottom: 1.3mm !important;
                 border-radius: 6px !important;
                 background: rgba(255, 255, 255, 0.05) !important;
             }
 
             .price-row {
-                margin-bottom: 3.1px !important;
-                min-height: 15.5px !important;
+                margin-bottom: 2.5px !important;
+                min-height: 14px !important;
             }
 
             .price-row:last-child {
@@ -431,23 +437,29 @@
             .item-img,
             .item-img-lg,
             .item-img-md {
-                width: 15.5px !important;
-                height: 15.5px !important;
+                width: 14.5px !important;
+                height: 14.5px !important;
                 border-radius: 3.5px !important;
-                margin-right: 5.5px !important;
+                margin-right: 5px !important;
                 padding: 1px !important;
             }
 
             .item-name,
             .item-name-lg {
-                font-size: 9.4px !important;
+                font-size: 9px !important;
+                line-height: 1.14 !important;
+            }
+
+            .shades-note {
+                font-size: 7.4px !important;
                 line-height: 1.15 !important;
+                margin-top: 1px !important;
             }
 
             .item-price,
             .item-price-lg {
-                font-size: 9.7px !important;
-                line-height: 1.15 !important;
+                font-size: 9.3px !important;
+                line-height: 1.14 !important;
             }
 
             .price-leader {
@@ -456,34 +468,31 @@
                 min-width: 6px !important;
             }
 
-            /* Оптовые цены имплантатов — 2 столбца */
             .premium-box .sub-variants {
                 display: grid !important;
                 grid-template-columns: 1fr 1fr !important;
-                gap: 0.5mm 3mm !important;
-                margin-top: 0.7mm !important;
+                gap: 0.4mm 2.8mm !important;
+                margin-top: 0.6mm !important;
             }
 
-            /* Оптовые цены ретрактора — 1 ровный столбец */
             .retractor-variants {
                 display: flex !important;
                 flex-direction: column !important;
-                gap: 0.4mm !important;
-                margin-top: 0.7mm !important;
+                gap: 0.35mm !important;
+                margin-top: 0.6mm !important;
             }
 
             .sub-row {
-                font-size: 8px !important;
-                line-height: 1.2 !important;
+                font-size: 7.6px !important;
+                line-height: 1.18 !important;
                 margin-top: 0 !important;
             }
 
             .unit-hint {
-                font-size: 7.2px !important;
+                font-size: 6.8px !important;
                 margin-left: 2px !important;
             }
 
-            /* Нижняя карточка контактов прижата к правому нижнему углу */
             .corner-footer-contact {
                 display: flex !important;
                 align-items: center !important;
@@ -491,14 +500,14 @@
                 background: rgba(16, 18, 24, 0.82) !important;
                 border: 1px solid rgba(255, 255, 255, 0.25) !important;
                 border-radius: 8px !important;
-                padding: 2.8mm 3.5mm !important;
+                padding: 2.4mm 3.5mm !important;
                 margin: 0 !important;
                 color: #ffffff !important;
-                font-size: 10px !important;
+                font-size: 9.8px !important;
             }
 
             .corner-footer-contact strong {
-                font-size: 11px !important;
+                font-size: 10.8px !important;
                 letter-spacing: 0.3px !important;
             }
         }
@@ -523,14 +532,14 @@
 
     <div class="categories-grid">
         
-        <!-- ЛЕВАЯ КОЛОНКА (Разделы 1–4) -->
+        <!-- ЛЕВАЯ КОЛОНКА (Имплантаты + Кость, Мембраны, Полистом) -->
         <div class="print-col">
             <!-- 1. ИМПЛАНТАТЫ И КОМПОНЕНТЫ -->
             <div class="category">
                 <div class="category-title">Имплантаты и компоненты</div>
                 
                 <div class="premium-box">
-                    <div class="price-row" style="margin-bottom: 14px;">
+                    <div class="price-row" style="margin-bottom: 12px;">
                         <img src="astfa.png" alt="ASTFA" class="item-img item-img-lg">
                         <div class="item-info">
                             <div class="item-header"><div class="item-name item-name-lg">Имплантаты ASTFA (от 1 шт)</div><div class="price-leader"></div><div class="item-price item-price-lg">4 800 ₽</div></div>
@@ -571,7 +580,37 @@
                 <div class="price-row"><img src="formir.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Формирователь десны</div><div class="price-leader"></div><div class="item-price">1 100 ₽</div></div></div></div>
             </div>
 
-            <!-- 2. НАБОРЫ И ИНСТРУМЕНТЫ -->
+            <!-- 2. КОСТЬ И МЕМБРАНЫ (С новыми позициями THE Graft) -->
+            <div class="category">
+                <div class="category-title">Кость, Мембраны, Полистом</div>
+                <div class="price-row"><img src="sureoss.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кортикальная кость SureOss 1 гр.</div><div class="price-leader"></div><div class="item-price">8 700 ₽</div></div></div></div>
+                <div class="price-row"><img src="osteoss.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кортикально Губчатая кость OsteOss 1 гр.</div><div class="price-leader"></div><div class="item-price">9 500 ₽</div></div></div></div>
+                <div class="price-row"><img src="biooss_05.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Bio-Oss Geistlich S 0,5 г</div><div class="price-leader"></div><div class="item-price">10 541 ₽</div></div></div></div>
+                <div class="price-row"><img src="biooss_1.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Bio-Oss Geistlich S 1 г</div><div class="price-leader"></div><div class="item-price">19 808 ₽</div></div></div></div>
+                <div class="price-row"><img src="bioosspen.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Bio-Oss Pen Geistlich S 0.5 г</div><div class="price-leader"></div><div class="item-price">12 090 ₽</div></div></div></div>
+                
+                <!-- НОВЫЕ ПОЗИЦИИ: Кость THE Graft (2 со шприцем и 4 без шприца) -->
+                <div class="price-row"><img src="thegraft_shpric.jpg" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кость THE Graft BG-A05 0,5cc (0,25g) S в шприце</div><div class="price-leader"></div><div class="item-price">4 550 ₽</div></div></div></div>
+                <div class="price-row"><img src="thegraft_shpric.jpg" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кость THE Graft BG-A05 1,0cc (0,5g) S в шприце</div><div class="price-leader"></div><div class="item-price">6 450 ₽</div></div></div></div>
+                <div class="price-row"><img src="thegraft.jpg" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кость THE Graft BG-A05 1.2cc (0,5g) S</div><div class="price-leader"></div><div class="item-price">6 100 ₽</div></div></div></div>
+                <div class="price-row"><img src="thegraft.jpg" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кость THE Graft BG-A10 2.4cc (1,0g) S</div><div class="price-leader"></div><div class="item-price">9 950 ₽</div></div></div></div>
+                <div class="price-row"><img src="thegraft.jpg" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кость THE Graft BG-B05 1.8cc (0,5g) L</div><div class="price-leader"></div><div class="item-price">6 100 ₽</div></div></div></div>
+                <div class="price-row"><img src="thegraft.jpg" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кость THE Graft BG-B10 3.6cc (1,0g) L</div><div class="price-leader"></div><div class="item-price">9 950 ₽</div></div></div></div>w"><img src="thegraft.jpg" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кость THE Graft BG-B10 3.6cc (1,0g) L</div><div class="price-leader"></div><div class="item-price">9 950 ₽</div></div></div></div>
+
+                <div class="price-row"><img src="kolapop.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Колапол КП-3 (10 фрагментов)</div><div class="price-leader"></div><div class="item-price">2 990 ₽</div></div></div></div>
+                <div class="price-row"><img src="softgide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">SOFTGIDE MSCM-1 (15*20 мм)</div><div class="price-leader"></div><div class="item-price">5 000 ₽</div></div></div></div>
+                <div class="price-row"><img src="softgide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">SOFTGIDE MSCM-3 (20*30 мм)</div><div class="price-leader"></div><div class="item-price">7 500 ₽</div></div></div></div>
+                <div class="price-row"><img src="softgide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">SOFTGIDE MSCM-5 (30*40 мм)</div><div class="price-leader"></div><div class="item-price">14 200 ₽</div></div></div></div>
+                <div class="price-row"><img src="biogide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Мембрана Bio-Gide Geistlich 25x25 мм</div><div class="price-leader"></div><div class="item-price">16 470 ₽</div></div></div></div>
+                <div class="price-row"><img src="stimulocc.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Губка Стимул-Осс D 11 мл №1</div><div class="price-leader"></div><div class="item-price">103 ₽</div></div></div></div>
+                <div class="price-row"><img src="gubka_gemo.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Губка гемостатическая 50Х50</div><div class="price-leader"></div><div class="item-price">117 ₽</div></div></div></div>
+                <div class="price-row"><img src="scraper.jpg" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Скребок костный OSUNG MND</div><div class="price-leader"></div><div class="item-price">3 000 ₽</div></div></div></div>
+            </div>
+        </div>
+
+        <!-- ПРАВАЯ КОЛОНКА (Наборы + Слепочные + Керамика компактно + Шовный + Контакты) -->
+        <div class="print-col">
+            <!-- 3. НАБОРЫ И ИНСТРУМЕНТЫ -->
             <div class="category">
                 <div class="category-title">Наборы и инструменты</div>
                 <div class="price-row"><img src="convenient.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Набор CONVENIENT Kit BHM BIOTEM</div><div class="price-leader"></div><div class="item-price">30 000 ₽</div></div></div></div>
@@ -599,7 +638,7 @@
                 </div>        
             </div>
 
-            <!-- 3. СЛЕПОЧНЫЕ МАТЕРИАЛЫ -->
+            <!-- 4. СЛЕПОЧНЫЕ МАТЕРИАЛЫ -->
             <div class="category">
                 <div class="category-title">Слепочные материалы</div>
                 <div class="price-row"><img src="durosil.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">С-силикон DUROSIL L база 910 мл</div><div class="price-leader"></div><div class="item-price">2 931 ₽</div></div></div></div>
@@ -607,59 +646,41 @@
                 <div class="price-row"><img src="durosil.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">С-силикон DUROSIL набор (900+140+60мл)</div><div class="price-leader"></div><div class="item-price">3 519 ₽</div></div></div></div>
             </div>
 
-            <!-- 4. КОСТЬ И МЕМБРАНЫ -->
-            <div class="category">
-                <div class="category-title">Кость, Мембраны, Полистом</div>
-                <div class="price-row"><img src="sureoss.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кортикальная кость SureOss 1 гр.</div><div class="price-leader"></div><div class="item-price">8 700 ₽</div></div></div></div>
-                <div class="price-row"><img src="osteoss.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Кортикально Губчатая кость OsteOss 1 гр.</div><div class="price-leader"></div><div class="item-price">9 500 ₽</div></div></div></div>
-                <div class="price-row"><img src="biooss_05.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Bio-Oss Geistlich S 0,5 г</div><div class="price-leader"></div><div class="item-price">10 541 ₽</div></div></div></div>
-                <div class="price-row"><img src="biooss_1.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Bio-Oss Geistlich S 1 г</div><div class="price-leader"></div><div class="item-price">19 808 ₽</div></div></div></div>
-                <div class="price-row"><img src="bioosspen.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Bio-Oss Pen Geistlich S 0.5 г</div><div class="price-leader"></div><div class="item-price">12 090 ₽</div></div></div></div>
-                <div class="price-row"><img src="kolapop.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Колапол КП-3 (10 фрагментов)</div><div class="price-leader"></div><div class="item-price">2 990 ₽</div></div></div></div>
-                <div class="price-row"><img src="softgide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">SOFTGIDE MSCM-1 (15*20 мм)</div><div class="price-leader"></div><div class="item-price">5 000 ₽</div></div></div></div>
-                <div class="price-row"><img src="softgide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">SOFTGIDE MSCM-3 (20*30 мм)</div><div class="price-leader"></div><div class="item-price">7 500 ₽</div></div></div></div>
-                <div class="price-row"><img src="softgide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">SOFTGIDE MSCM-5 (30*40 мм)</div><div class="price-leader"></div><div class="item-price">14 200 ₽</div></div></div></div>
-                <div class="price-row"><img src="biogide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Мембрана Bio-Gide Geistlich 25x25 мм</div><div class="price-leader"></div><div class="item-price">16 470 ₽</div></div></div></div>
-                <div class="price-row"><img src="stimulocc.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Губка Стимул-Осс D 11 мл №1</div><div class="price-leader"></div><div class="item-price">103 ₽</div></div></div></div>
-                <div class="price-row"><img src="gubka_gemo.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Губка гемостатическая 50Х50</div><div class="price-leader"></div><div class="item-price">117 ₽</div></div></div></div>
-                <div class="price-row"><img src="scraper.jpg" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Скребок костный OSUNG MND</div><div class="price-leader"></div><div class="item-price">3 000 ₽</div></div></div></div>
-            </div>
-        </div>
-
-        <!-- ПРАВАЯ КОЛОНКА (Разделы 5–6 + угловой блок контактов) -->
-        <div class="print-col">
-            <!-- 5. КЕРАМИЧЕСКИЕ МАССЫ -->
+            <!-- 5. КЕРАМИЧЕСКИЕ МАССЫ (Компактно без картинок) -->
             <div class="category">
                 <div class="category-title">Керамические массы</div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR BL1 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR BL2 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR BL2 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR BL3 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A1 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A1 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A2 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A2 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A3 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A3 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A3.5 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A3.5 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A4 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-A4 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-B2 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-B2 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-B3 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-                <div class="price-row"><img src="dentin.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">DENTIN ZR-C4 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-                
-                <div class="price-row"><img src="enamel.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">ENAMEL ZR BLE 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-                <div class="price-row"><img src="enamel.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">ENAMEL ZR-58 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-                <div class="price-row"><img src="enamel.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">ENAMEL ZR-59 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-                <div class="price-row"><img src="enamel.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">ENAMEL ZR-59 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-                <div class="price-row"><img src="enamel.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">ENAMEL ZR-60 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div></div></div>
-                
-                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">NEUTRAL ZR 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">OPAQUE DENTIN ZR-A2 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
-                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">OPAQUE MC-A2 20гр.</div><div class="price-leader"></div><div class="item-price">2 700 ₽</div></div></div></div>
-                <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Clear ZR 20гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div></div></div>
+                <div class="price-row">
+                    <div class="item-info">
+                        <div class="item-header"><div class="item-name">DENTIN ZR — 20 гр.</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div>
+                        <div class="shades-note">Оттенки: BL2, A1, A2, A3, A3.5, A4, B2, B3</div>
+                    </div>
+                </div>
+                <div class="price-row">
+                    <div class="item-info">
+                        <div class="item-header"><div class="item-name">DENTIN ZR — 50 гр.</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div>
+                        <div class="shades-note">Оттенки: BL1, BL2, BL3, A1, A2, A3, A3.5, A4, B2, C4</div>
+                    </div>
+                </div>
+                <div class="price-row">
+                    <div class="item-info">
+                        <div class="item-header"><div class="item-name">ENAMEL ZR — 20 гр. (ZR-59)</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div>
+                    </div>
+                </div>
+                <div class="price-row">
+                    <div class="item-info">
+                        <div class="item-header"><div class="item-name">ENAMEL ZR — 50 гр. (BLE, ZR-58, ZR-59, ZR-60)</div><div class="price-leader"></div><div class="item-price">6 336 ₽</div></div>
+                    </div>
+                </div>
+                <div class="price-row">
+                    <div class="item-info">
+                        <div class="item-header"><div class="item-name">NEUTRAL ZR / Clear ZR / OPAQUE DENTIN ZR-A2 (20 гр.)</div><div class="price-leader"></div><div class="item-price">3 200 ₽</div></div>
+                    </div>
+                </div>
+                <div class="price-row">
+                    <div class="item-info">
+                        <div class="item-header"><div class="item-name">OPAQUE MC-A2 (20 гр.)</div><div class="price-leader"></div><div class="item-price">2 700 ₽</div></div>
+                    </div>
+                </div>
             </div>
 
             <!-- 6. ШОВНЫЙ МАТЕРИАЛ -->
