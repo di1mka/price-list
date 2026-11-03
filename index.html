@@ -78,7 +78,7 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 30px;
         }
 
@@ -100,20 +100,28 @@
         }
 
         .contact-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 8px 14px;
+            border-radius: 14px;
+            padding: 10px 16px;
             color: var(--primary-text);
             font-size: 13px;
             font-weight: 600;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
         }
 
-        .contact-badge span {
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            white-space: nowrap;
+        }
+
+        .contact-item span {
             color: #cbd5e1;
             font-weight: 500;
         }
@@ -298,7 +306,7 @@
         }
 
         /* =========================================================
-           ПЕЧАТЬ НА 1 ЛИСТ А4 (С НОВЫМИ МЕМБРАНАМИ ORTOKEEP)
+           ПЕЧАТЬ НА 1 ЛИСТ А4 (С 3 НОМЕРАМИ ТЕЛЕФОНОВ И НОВОЙ ЦЕНОЙ)
            ========================================================= */
         @page {
             size: A4 portrait;
@@ -344,7 +352,7 @@
                 max-width: 202mm !important;
                 height: 290mm !important;
                 margin: 3.5mm auto !important;
-                padding: 4mm 5.5mm !important;
+                padding: 3.8mm 5.5mm !important;
                 box-sizing: border-box !important;
                 border-radius: 14px !important;
                 border: 1px solid rgba(255, 255, 255, 0.18) !important;
@@ -361,8 +369,8 @@
                 flex-direction: row !important;
                 align-items: center !important;
                 justify-content: space-between !important;
-                margin-bottom: 2.2mm !important;
-                padding-bottom: 1.6mm !important;
+                margin-bottom: 2mm !important;
+                padding-bottom: 1.5mm !important;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.22) !important;
                 text-align: left !important;
                 flex-shrink: 0 !important;
@@ -375,16 +383,23 @@
             }
 
             .subtitle {
-                font-size: 9px !important;
+                font-size: 8.8px !important;
                 letter-spacing: 1.3px !important;
             }
 
             .contact-badge {
+                display: flex !important;
+                flex-direction: row !important;
+                gap: 3.5mm !important;
                 background: rgba(18, 20, 26, 0.85) !important;
                 border: 1px solid rgba(255, 255, 255, 0.3) !important;
-                border-radius: 9px !important;
-                padding: 1.8mm 3.8mm !important;
-                font-size: 11px !important;
+                border-radius: 8px !important;
+                padding: 1.6mm 3.2mm !important;
+                font-size: 8.8px !important;
+            }
+
+            .contact-item {
+                gap: 4px !important;
             }
 
             .categories-grid {
@@ -408,30 +423,30 @@
                 background: rgba(16, 18, 24, 0.76) !important;
                 border: 1px solid rgba(255, 255, 255, 0.15) !important;
                 border-radius: 9px !important;
-                padding: 2mm 2.8mm !important;
+                padding: 1.9mm 2.8mm !important;
                 box-sizing: border-box !important;
             }
 
             .category-title {
-                font-size: 12.8px !important;
-                margin-bottom: 1.4mm !important;
-                padding-bottom: 0.8mm !important;
+                font-size: 12.6px !important;
+                margin-bottom: 1.3mm !important;
+                padding-bottom: 0.7mm !important;
             }
 
             .premium-box {
-                padding: 1.4mm 2mm !important;
-                margin-bottom: 1.4mm !important;
+                padding: 1.3mm 2mm !important;
+                margin-bottom: 1.3mm !important;
                 border-radius: 7px !important;
                 background: rgba(255, 255, 255, 0.05) !important;
             }
 
             .premium-box .price-row {
-                margin-bottom: 4px !important;
+                margin-bottom: 3.5px !important;
             }
 
             .price-row {
-                margin-bottom: 3px !important;
-                min-height: 15.5px !important;
+                margin-bottom: 2.8px !important;
+                min-height: 15px !important;
             }
 
             .price-row:last-child {
@@ -441,8 +456,8 @@
             .item-img,
             .item-img-lg,
             .item-img-md {
-                width: 15.5px !important;
-                height: 15.5px !important;
+                width: 15px !important;
+                height: 15px !important;
                 border-radius: 3.5px !important;
                 margin-right: 5.5px !important;
                 padding: 1px !important;
@@ -450,19 +465,19 @@
 
             .item-name,
             .item-name-lg {
-                font-size: 9.5px !important;
+                font-size: 9.4px !important;
                 line-height: 1.15 !important;
             }
 
             .shades-note {
-                font-size: 8px !important;
+                font-size: 7.9px !important;
                 line-height: 1.18 !important;
                 margin-top: 1px !important;
             }
 
             .item-price,
             .item-price-lg {
-                font-size: 9.8px !important;
+                font-size: 9.7px !important;
                 line-height: 1.15 !important;
             }
 
@@ -475,44 +490,64 @@
             .premium-box .sub-variants {
                 display: grid !important;
                 grid-template-columns: 1fr 1fr !important;
-                gap: 0.5mm 3mm !important;
-                margin-top: 0.6mm !important;
+                gap: 0.45mm 3mm !important;
+                margin-top: 0.5mm !important;
             }
 
             .retractor-variants {
                 display: flex !important;
                 flex-direction: column !important;
-                gap: 0.5mm !important;
-                margin-top: 0.6mm !important;
+                gap: 0.45mm !important;
+                margin-top: 0.5mm !important;
             }
 
             .sub-row {
-                font-size: 8.1px !important;
-                line-height: 1.2 !important;
+                font-size: 8px !important;
+                line-height: 1.18 !important;
                 margin-top: 0 !important;
             }
 
             .unit-hint {
-                font-size: 7.2px !important;
+                font-size: 7.1px !important;
                 margin-left: 2px !important;
             }
 
             .corner-footer-contact {
                 display: flex !important;
-                align-items: center !important;
-                justify-content: space-between !important;
+                flex-direction: column !important;
+                gap: 1.2mm !important;
                 background: rgba(16, 18, 24, 0.85) !important;
                 border: 1px solid rgba(255, 255, 255, 0.28) !important;
                 border-radius: 9px !important;
-                padding: 2.8mm 4mm !important;
+                padding: 2.2mm 3.5mm !important;
                 margin: 0 !important;
                 color: #ffffff !important;
-                font-size: 10.4px !important;
             }
 
-            .corner-footer-contact strong {
-                font-size: 11.4px !important;
-                letter-spacing: 0.3px !important;
+            .footer-contact-title {
+                font-size: 8.8px !important;
+                color: #94a3b8 !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.8px !important;
+                font-weight: 600 !important;
+            }
+
+            .footer-contact-list {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 0.8mm !important;
+            }
+
+            .footer-contact-row {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                font-size: 9.8px !important;
+            }
+
+            .footer-contact-row strong {
+                font-size: 10.2px !important;
+                letter-spacing: 0.2px !important;
             }
         }
     </style>
@@ -530,7 +565,9 @@
             <div class="subtitle">Материалы и инструменты • price-3vmed.ru</div>
         </div>
         <div class="contact-badge">
-            📞 8-905-498-23-26 <span>• Никита</span>
+            <div class="contact-item">📞 8-905-498-23-26 <span>• Никита</span></div>
+            <div class="contact-item">📞 8-906-493-03-26 <span>• Илья</span></div>
+            <div class="contact-item">📞 8-909-766-23-26 <span>• Валентин</span></div>
         </div>
     </div>
 
@@ -611,7 +648,7 @@
 
                 <div class="price-row"><img src="kolapop.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Колапол КП-3 (10 фрагментов)</div><div class="price-leader"></div><div class="item-price">2 990 ₽</div></div></div></div>
 
-                <!-- НОВЫЕ ПОЗИЦИИ: Мембрана Ortokeep (5 размеров) -->
+                <!-- Мембрана Ortokeep (5 размеров) -->
                 <div class="price-row"><img src="ortokeep.jpg" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Мембрана Ortokeep (10x15 мм)</div><div class="price-leader"></div><div class="item-price">2 500 ₽</div></div></div></div>
                 <div class="price-row"><img src="ortokeep.jpg" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Мембрана Ortokeep (16x22 мм)</div><div class="price-leader"></div><div class="item-price">3 700 ₽</div></div></div></div>
                 <div class="price-row"><img src="ortokeep.jpg" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Мембрана Ortokeep (25x25 мм)</div><div class="price-leader"></div><div class="item-price">5 900 ₽</div></div></div></div>
@@ -622,7 +659,7 @@
                 <div class="price-row"><img src="softgide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">SOFTGIDE MSCM-3 (20*30 мм)</div><div class="price-leader"></div><div class="item-price">7 500 ₽</div></div></div></div>
                 <div class="price-row"><img src="softgide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">SOFTGIDE MSCM-5 (30*40 мм)</div><div class="price-leader"></div><div class="item-price">14 200 ₽</div></div></div></div>
                 <div class="price-row"><img src="biogide.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Мембрана Bio-Gide Geistlich 25x25 мм</div><div class="price-leader"></div><div class="item-price">16 470 ₽</div></div></div></div>
-                <div class="price-row"><img src="stimulocc.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Губка Стимул-Осс D 11 мл №1</div><div class="price-leader"></div><div class="item-price">103 ₽</div></div></div></div>
+                <div class="price-row"><img src="stimulocc.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Губка Стимул-Осс D 11 мл №1</div><div class="price-leader"></div><div class="item-price">98 ₽</div></div></div></div>
                 <div class="price-row"><img src="gubka_gemo.png" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Губка гемостатическая 50Х50</div><div class="price-leader"></div><div class="item-price">117 ₽</div></div></div></div>
                 <div class="price-row"><img src="scraper.jpg" alt="" class="item-img"><div class="item-info"><div class="item-header"><div class="item-name">Скребок костный OSUNG MND</div><div class="price-leader"></div><div class="item-price">3 000 ₽</div></div></div></div>
             </div>
@@ -718,10 +755,14 @@
                 <div class="price-row"><div class="item-info"><div class="item-header"><div class="item-name">Ультрасорб 5/0, 75 см, HS-15 обр.реж</div><div class="price-leader"></div><div class="item-price">229 ₽</div></div></div></div>
             </div>
 
-            <!-- Блок с телефоном в правом нижнем углу листа А4 -->
+            <!-- Блок с 3 телефонами в правом нижнем углу листа А4 -->
             <div class="corner-footer-contact">
-                <span>По вопросам заказа:</span>
-                <strong>📞 8-905-498-23-26 — Никита</strong>
+                <div class="footer-contact-title">По вопросам заказа:</div>
+                <div class="footer-contact-list">
+                    <div class="footer-contact-row"><span>Никита</span><strong>📞 8-905-498-23-26</strong></div>
+                    <div class="footer-contact-row"><span>Илья</span><strong>📞 8-906-493-03-26</strong></div>
+                    <div class="footer-contact-row"><span>Валентин</span><strong>📞 8-909-766-23-26</strong></div>
+                </div>
             </div>
         </div>
 
